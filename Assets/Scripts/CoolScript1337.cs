@@ -3,11 +3,7 @@ using UnityEngine;
 
 public class CoolScript1337 : MonoBehaviour
 {
-    CoolScript1337()
-    {
-        print();
-    }
-    void print()
+    void Start()
     {
         Debug.Log("Testo");
     }

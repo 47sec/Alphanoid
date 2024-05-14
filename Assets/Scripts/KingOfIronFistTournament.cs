@@ -3,8 +3,15 @@ using UnityEngine;
 
 public class IonitskiScript : MonoBehaviour
 {
-    IonitskiScript()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        Debug.Log("HAIYAAAAAAAAAOOOOO");
+        Debug.Log("HAAAYAAAOOO");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 }

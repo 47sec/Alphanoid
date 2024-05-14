@@ -6,5 +6,6 @@ public class CoolScript1337 : MonoBehaviour
     void Start()
     {
         Debug.Log("Testo");
+        Debug.Log("Testo2");
     }
 }

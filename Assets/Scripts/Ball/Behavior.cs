@@ -7,7 +7,7 @@ public class MoveBall : MonoBehaviour
 
     Rigidbody2D rb;
     private bool ballIsActivated;
-    public Transform obj;
+    public Transform platform;
     public float speed;
 
     private void Start()
@@ -23,7 +23,9 @@ public class MoveBall : MonoBehaviour
             BallActivate();
             ballIsActivated = true;
         }
+        if (!ballIsActivated) { transform.position = new Vector2(platform.position.x, transform.position.y); }
     }
+    
     private void BallActivate()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,8 +40,7 @@ public class MoveBall : MonoBehaviour
             ballIsActivated = false;
             rb.velocity = Vector2.zero;
             transform.position = new Vector2(0, -3);
-            obj.position = new Vector2(0, -4);
-
+            platform.position = new Vector2(0, -4);
         }
     }
 }

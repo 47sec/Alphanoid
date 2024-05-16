@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MoveBall : MonoBehaviour
 {
@@ -7,13 +8,16 @@ public class MoveBall : MonoBehaviour
 
     Rigidbody2D rb;
     private bool ballIsActivated;
+
+    [Tooltip("ѕлатформа")]
     public Transform platform;
+
+    [Tooltip("—корость м€ча")]
     public float speed;
 
     private void Start()
     {
         ballIsActivated = false;
-        speed = 8;
     }
 
     void Update()

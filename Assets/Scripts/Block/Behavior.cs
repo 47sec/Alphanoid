@@ -19,7 +19,8 @@ public class Behaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Hit"))
         {
             Debug.Log("Block [" + this.name + "] destroyed!");
-            transform.position = new Vector2(10, 10);
+            //transform.position = new Vector2(10, 10);
+            Destroy(transform.gameObject);
         }
     }
 }

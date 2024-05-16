@@ -34,7 +34,6 @@ public class PlatformMovement : MonoBehaviour
             float direction_x = new Vector2(distance, 0).normalized.x; // Сторона, в которую будет отскок
 
             float center_clamp = Mathf.Floor(Mathf.Clamp(Mathf.Abs(distance) * centerSize, 0, 1)) * Mathf.Abs(distance) + 0.05f;
-            Debug.Log(center_clamp);
 
             ball_rb.velocity =
                 (

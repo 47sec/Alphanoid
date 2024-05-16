@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Lose
   - Hit
+  - Scored
   layers:
   - Default
   - TransparentFX

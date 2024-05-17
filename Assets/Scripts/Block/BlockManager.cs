@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -15,13 +16,32 @@ public class BlockManager : MonoBehaviour
     [Tooltip("Игрок")]
     public GameObject player;
 
+    [Tooltip("Поле, на котором будут спавниться блоки")]
+    public GameObject blocksField;
+
+    [Tooltip("Размер блоков")]
+    public Vector2 scale = new Vector2(1, 1);
+
+    [Tooltip("Количество блоков")]
+    public uint blocksAmount;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        blocks.Add(Instantiate(sampleBlock));
-        blocks.Add(Instantiate(sampleBlock));
-        blocks[0].transform.position = new Vector2(-1, -1);
-        blocks[1].transform.position = new Vector2(1, 1);
+        for (int i = 0; i < blocksAmount; i++)
+        {
+            blocks.Add(Instantiate(sampleBlock));
+            blocks[i].transform.position.Scale(scale);
+        }
+
+
+    }
+
+    private List<Vector2> getPoints()
+    {
+        List<Vector2> points = new List<Vector2>();
+
+        return points;
     }
 
     private void DestroyBlock(Block block)

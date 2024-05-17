@@ -5,18 +5,30 @@ public class PlatformMovement : MonoBehaviour
 {
     [Tooltip("Скорость платформы")]
     public float speed;
+    private bool canMoveToLeft;
+    private bool canMoveToRight;
 
     void Start()
     {
+        canMoveToLeft = true;
+        canMoveToRight = true;
     }
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.D)) { transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y); }
-        if (Input.GetKey(KeyCode.A)) { transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y); }
+        if (Input.GetKey(KeyCode.D) && canMoveToRight)
+        {
+            transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
+        }
 
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -10f, 10f), transform.position.y);
+        if (Input.GetKey(KeyCode.A) && canMoveToLeft)
+        {
+            transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
+        }
+
+        //transform.position = new Vector2(Mathf.Clamp(transform.position.x, -10f, 10f), transform.position.y);
     }
+
     [Tooltip("Больше число, больше угол отскока на краях")]
     public float angleMod = 8f;
 
@@ -43,5 +55,23 @@ public class PlatformMovement : MonoBehaviour
                 ).normalized
                 * (ball_rb.velocity / ball_rb.velocity.normalized);
         }
+
+        if (other.gameObject.CompareTag("This Left Wall"))
+        {
+            canMoveToLeft = false;
+            Debug.Log("This Wall");
+        }
+        if (other.gameObject.CompareTag("This Right Wall"))
+        {
+            canMoveToRight = false;
+            Debug.Log("This Wall");
+        }
+
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        canMoveToLeft = true;
+
+        canMoveToRight = true;
     }
 }

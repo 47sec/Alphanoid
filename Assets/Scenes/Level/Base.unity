@@ -840,7 +840,7 @@ Transform:
   m_GameObject: {fileID: 634367006}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.6345, y: 8.15, z: -0.042633392}
+  m_LocalPosition: {x: -0.6345, y: 8.1, z: -0.042633392}
   m_LocalScale: {x: 0.3, y: 24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1764,7 +1764,7 @@ Transform:
   m_GameObject: {fileID: 2011032160}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.38407025, y: 0.14919177, z: 10.031433}
+  m_LocalPosition: {x: 0, y: 0, z: 10.031433}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1788,8 +1788,8 @@ MonoBehaviour:
   sampleBlock: {fileID: 2036193746}
   player: {fileID: 273101920}
   blocksField: {fileID: 2095286953}
-  scale: {x: 1, y: 1}
-  blocksAmount: 100
+  scale: {x: 1, y: 0.5}
+  blocksAmount: 80
 --- !u!1 &2036193746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,7 +1868,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!212 &2036193750
 SpriteRenderer:
@@ -1970,8 +1970,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.41, y: 2.62}
-  m_SizeDelta: {x: 12, y: 6}
+  m_AnchoredPosition: {x: 0, y: 2.5}
+  m_SizeDelta: {x: 10, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

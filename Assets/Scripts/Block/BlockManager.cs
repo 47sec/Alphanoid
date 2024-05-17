@@ -20,7 +20,7 @@ public class BlockManager : MonoBehaviour
     public RectTransform blocksField;
 
     [Tooltip("Размер блоков")]
-    public Vector2 scale = new Vector2(1, 1);
+    public Vector2 scale;
 
     [Tooltip("Количество блоков")]
     public uint blocksAmount;
@@ -31,12 +31,12 @@ public class BlockManager : MonoBehaviour
         for (int i = 0; i < blocksAmount; i++)
         {
             blocks.Add(Instantiate(sampleBlock));
-            blocks[i].transform.position.Scale(scale);
+            blocks[i].transform.localScale = scale * sampleBlock.transform.localScale;
         }
 
         List<Vector2> points = getPoints();
 
-        for (int i = 0; i < points.Count; i++)
+        for (int i = 0; i < blocks.Count; i++)
         {
             blocks[i].transform.position = points[i];
         }
@@ -46,39 +46,28 @@ public class BlockManager : MonoBehaviour
     {
         List<Vector2> points = new List<Vector2>();
 
-        float x_size = blocksField.transform.localScale.x;
-        float y_size = blocksField.transform.localScale.y;
-
-        // Формула отсюда: https://math.stackexchange.com/questions/1039482/how-to-evenly-space-a-number-of-points-in-a-rectangle
-        uint y_points = (uint)(Mathf.Floor(Mathf.Sqrt((x_size / y_size) * blocksAmount + (Mathf.Pow(x_size - y_size, 2) / 4 * Mathf.Pow(y_size, 2)))
-            - ((x_size - y_size) / 2 * y_size)));
-
-        if (y_points == 0)
-            y_points = 1;
-
-        Debug.Log(x_size + " " + y_size);
-        Debug.Log(y_points);
-        uint x_points = (uint)(Mathf.Floor(blocksAmount / y_points));
-
-        uint missingPoints = blocksAmount - (x_points * y_points);
-        Debug.Log(x_points + " " + y_points + " " + missingPoints);
-
         Vector2 max = blocksField.offsetMax;
         Vector2 min = blocksField.offsetMin;
-
         Vector2 distance = max - min;
 
-        Debug.Log(max);
-        Debug.Log(min);
-        Debug.Log(distance);
+        // Формула отсюда: https://math.stackexchange.com/questions/1039482/how-to-evenly-space-a-number-of-points-in-a-rectangle
+        float y_points = Mathf.Sqrt((distance.x / distance.y) * blocksAmount + (((distance.x - distance.y) * (distance.x - distance.y)) / (4 * distance.y * distance.y)))
+            - ((distance.x - distance.y) / (2 * distance.y));
+
+        float x_points = (blocksAmount / y_points);
+
+        uint missingPoints = blocksAmount - (uint)(Mathf.Floor(x_points) * Mathf.Round(y_points));
+
+        if (missingPoints > 0)
+            y_points++;
 
         for (uint i = 0; i < y_points; i++)
         {
             for (uint j = 0; j < x_points; j++)
             {
-                float x_point = min.x + j * (distance.x / x_points) + 0.384f;
-                float y_point = min.y + i * (distance.y / y_points) + 0.149f;
-                //Debug.Log(x_point + " " + y_point);
+                float y_point = min.y + (0.5f + i) * (distance.y / y_points);
+                float x_point = min.x + (0.5f + j) * (distance.x / x_points);
+
                 points.Add(new Vector2(x_point, y_point));
             }
         }

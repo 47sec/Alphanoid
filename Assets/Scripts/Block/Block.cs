@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class Behaviour : MonoBehaviour
+public class Block : MonoBehaviour
 {
+    public GameObject blockManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +23,7 @@ public class Behaviour : MonoBehaviour
             //transform.position = new Vector2(10, 10);
             Destroy(transform.gameObject);
             collision.gameObject.SendMessage("Scored", 1u);
+
         }
     }
 }

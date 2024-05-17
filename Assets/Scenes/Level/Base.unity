@@ -278,8 +278,9 @@ GameObject:
   - component: {fileID: 273101922}
   - component: {fileID: 273101921}
   - component: {fileID: 273101925}
-  - component: {fileID: 273101926}
+  - component: {fileID: 273101928}
   - component: {fileID: 273101927}
+  - component: {fileID: 273101926}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -439,12 +440,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 273101920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31028374b7a6224da473fe1ab3e48f4, type: 3}
+  m_Script: {fileID: 11500000, guid: bc6e7183ddf98f24a8942f664a5d599a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
-  angleMod: 7
-  centerSize: 2.2
+  scoreText: {fileID: 1167533448}
+  hpText: {fileID: 631575820}
+  comboBonusText: {fileID: 341863404}
+  maxHp: 3
 --- !u!114 &273101927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,13 +456,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 273101920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc6e7183ddf98f24a8942f664a5d599a, type: 3}
+  m_Script: {fileID: 11500000, guid: e31028374b7a6224da473fe1ab3e48f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1167533448}
-  hpText: {fileID: 631575820}
-  comboBonusText: {fileID: 341863404}
-  maxHp: 3
+  angleMod: 8
+  centerSize: 2.2
+--- !u!114 &273101928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273101920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e924973ddec3a4698f332d2fc01f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 9
 --- !u!1 &341863403
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,7 +55,7 @@ public class PlayerScore : MonoBehaviour
             Killed();
         hp -= damage;
         comboBonus = 0;
-        comboBonusText.text = " ";
+        comboBonusText.text = "";
         hpText.text = "HP: " + hp;
     }
 

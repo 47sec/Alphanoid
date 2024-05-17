@@ -1785,6 +1785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocks: []
   sampleBlock: {fileID: 2036193746}
+  player: {fileID: 273101920}
 --- !u!1 &2036193746
 GameObject:
   m_ObjectHideFlags: 0

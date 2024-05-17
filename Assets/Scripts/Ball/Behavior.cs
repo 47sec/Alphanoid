@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MoveBall : MonoBehaviour
 {
@@ -7,13 +8,17 @@ public class MoveBall : MonoBehaviour
 
     Rigidbody2D rb;
     private bool ballIsActivated;
+
+    [Tooltip("ѕлатформа")]
     public Transform platform;
+
+    [Tooltip("—корость м€ча")]
     public float speed;
+
 
     private void Start()
     {
         ballIsActivated = false;
-        speed = 8;
     }
 
     void Update()
@@ -25,7 +30,7 @@ public class MoveBall : MonoBehaviour
         }
         if (!ballIsActivated) { transform.position = new Vector2(platform.position.x, transform.position.y); }
     }
-    
+
     private void BallActivate()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,13 +39,22 @@ public class MoveBall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Lose"))
+        switch (collision.gameObject.tag)
         {
-            Debug.Log("You lose :(");
-            ballIsActivated = false;
-            rb.velocity = Vector2.zero;
-            transform.position = new Vector2(0, -3);
-            platform.position = new Vector2(0, -4);
+            case "Lose":
+                platform.SendMessage("Damaged", 1);
+                ballIsActivated = false;
+                rb.velocity = Vector2.zero;
+                platform.position = new Vector2(0, -4);
+                transform.position = new Vector2(0, -3);
+                break;
+            default:
+                break;
         }
+    }
+
+    private void Scored(uint points)
+    {
+        platform.SendMessage("AddScore", points);
     }
 }

@@ -13,12 +13,17 @@ public class PlayerScore : MonoBehaviour
     [Tooltip("Текст хп игрока")]
     public TMPro.TextMeshPro hpText;
 
+    [Tooltip("Текст комбо бонуса")]
+    public TMPro.TextMeshPro comboBonusText;
+
     [Tooltip("Максимальное хп игрока")]
     public int maxHp;
 
     private int hp;
 
     private uint score = 0;
+
+    private uint comboBonus = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +36,7 @@ public class PlayerScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void AddScore(uint points)
@@ -39,7 +44,10 @@ public class PlayerScore : MonoBehaviour
         if (score + points >= 16) // Временная фигня, нужна нормальная проверка на победу
             Win();
 
-        score += points;
+        score += points + comboBonus;
+        comboBonus++;
+        if (comboBonus > 1)
+            comboBonusText.text = "Combo! " + comboBonus;
         scoreText.text = "Score: " + score;
     }
 
@@ -47,8 +55,9 @@ public class PlayerScore : MonoBehaviour
     {
         if (hp - damage <= 0)
             Killed();
-
         hp -= damage;
+        comboBonus = 0;
+        comboBonusText.text = " ";
         hpText.text = "HP: " + hp;
     }
 

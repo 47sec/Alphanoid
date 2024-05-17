@@ -21,9 +21,9 @@ public class Block : MonoBehaviour
         if (collision.gameObject.CompareTag("Hit"))
         {
             //transform.position = new Vector2(10, 10);
-            Destroy(transform.gameObject);
+            //Destroy(transform.gameObject);
+            blockManager.SendMessage("DestroyBlock", this);
             collision.gameObject.SendMessage("Scored", 1u);
-
         }
     }
 }

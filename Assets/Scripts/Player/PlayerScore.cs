@@ -41,9 +41,6 @@ public class PlayerScore : MonoBehaviour
 
     private void AddScore(uint points)
     {
-        if (score + points >= 16) // ¬ременна€ фигн€, нужна нормальна€ проверка на победу
-            Win();
-
         score += points + comboBonus;
         comboBonus++;
         if (comboBonus > 1)

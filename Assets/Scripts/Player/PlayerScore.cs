@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -52,23 +51,11 @@ public class PlayerScore : MonoBehaviour
     private void Damaged(int damage)
     {
         if (hp - damage <= 0)
-            Killed();
+            SceneManager.LoadScene("You Died");
+
         hp -= damage;
         comboBonus = 0;
         comboBonusText.text = "";
         hpText.text = "HP: " + hp;
     }
-
-    private void Killed()
-    {
-        SceneManager.LoadScene("You Died");
-        SceneManager.UnloadSceneAsync("Base");
-    }
-
-    private void Win()
-    {
-        SceneManager.LoadScene("You Win");
-        SceneManager.UnloadSceneAsync("Base");
-    }
-
 }

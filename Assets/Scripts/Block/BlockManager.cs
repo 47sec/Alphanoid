@@ -66,7 +66,6 @@ public class BlockManager : MonoBehaviour
     private void manualPlace()
     {
         Vector2 leftTopPoint = blocksField.offsetMax - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0);
-        Debug.Log(leftTopPoint);
 
         for (int i = 0; i < blocksRowsNumber.y; i++)
         {

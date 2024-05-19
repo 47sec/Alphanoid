@@ -1051,7 +1051,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -329, y: -144}
+  m_AnchoredPosition: {x: -499, y: -226}
   m_SizeDelta: {x: 2.0244, y: 0.934}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1255928787
@@ -1404,7 +1404,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -1479,7 +1479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -329.00003, y: -109.548004}
+  m_AnchoredPosition: {x: -499.00003, y: -191.548}
   m_SizeDelta: {x: 2.0244, y: 0.934}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1588109999
@@ -1801,12 +1801,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb075da51a2153341ae75e4bf86d0162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocks: []
   sampleBlock: {fileID: 2036193746}
-  player: {fileID: 273101920}
   blocksField: {fileID: 2095286953}
-  scale: {x: 1, y: 0.5}
+  blockScale: {x: 1, y: 0.5}
+  autoPlaceMode: 0
   blocksAmount: 80
+  blocksRowsNumber: {x: 10, y: 5}
+  blocksDistance: {x: 0.1, y: 0.1}
+  additionalOffset: {x: 0, y: 0}
 --- !u!1 &2036193746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,7 +1991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -329.00003, y: -180.76}
+  m_AnchoredPosition: {x: -499.00003, y: -262.75998}
   m_SizeDelta: {x: 2.0244, y: 0.934}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2053805427

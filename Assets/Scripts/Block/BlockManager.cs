@@ -8,14 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class BlockManager : MonoBehaviour
 {
-    [Tooltip("Игровые блоки")]
-    public List<GameObject> blocks = new List<GameObject>();
+    private List<GameObject> blocks = new List<GameObject>();
 
     [Tooltip("Макет блока")]
     public GameObject sampleBlock;
-
-    [Tooltip("Игрок")]
-    public GameObject player;
 
     [Tooltip("Поле, на котором будут спавниться блоки")]
     public RectTransform blocksField;
@@ -23,16 +19,35 @@ public class BlockManager : MonoBehaviour
     [Tooltip("Размер блоков")]
     public Vector2 blockScale;
 
-    [Tooltip("Автоматически распределять блоки по полю")]
+    [Tooltip("Автоматическое распределение блоков по полю")]
     public bool autoPlaceMode;
 
-    [ConditionalHide(nameof(autoPlaceMode), true, false)]
+    [ConditionalHide(nameof(autoPlaceMode), true)]
     [Tooltip("Количество блоков")]
-    public uint blocksAmount;
+    public uint blocksAmount = 0;
 
+    [ConditionalHide(nameof(autoPlaceMode), false, true)]
+    [Tooltip("Количество рядов и строк блоков")]
+    public Vector2 blocksRowsNumber;
+
+    [ConditionalHide(nameof(autoPlaceMode), false, true)]
+    [Tooltip("Расстояние между блоками (без учёта размера блока)")]
+    public Vector2 blocksDistance;
+
+    [ConditionalHide(nameof(autoPlaceMode), false, true)]
+    [Tooltip("Отступы")]
+    public Vector2 additionalOffset;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
+    {
+        if (autoPlaceMode)
+            autoPlace();
+        else
+            manualPlace();
+    }
+
+    private void autoPlace()
     {
         for (int i = 0; i < blocksAmount; i++)
         {
@@ -40,7 +55,7 @@ public class BlockManager : MonoBehaviour
             blocks[i].transform.localScale = blockScale * sampleBlock.transform.localScale;
         }
 
-        List<Vector2> points = getPoints();
+        List<Vector2> points = getAutoPoints();
 
         for (int i = 0; i < blocks.Count; i++)
         {
@@ -48,7 +63,29 @@ public class BlockManager : MonoBehaviour
         }
     }
 
-    private List<Vector2> getPoints()
+    private void manualPlace()
+    {
+        Vector2 leftTopPoint = blocksField.offsetMax - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0);
+        Debug.Log(leftTopPoint);
+
+        for (int i = 0; i < blocksRowsNumber.y; i++)
+        {
+            for (int j = 0; j < blocksRowsNumber.x; j++)
+            {
+                GameObject tmp_block = Instantiate(sampleBlock);
+                tmp_block.transform.localScale = blockScale * sampleBlock.transform.localScale;
+                tmp_block.transform.position = leftTopPoint + new Vector2
+                    (
+                        ((tmp_block.transform.localScale.x + blocksDistance.x) * j) + additionalOffset.x + (tmp_block.transform.localScale.x / 2),
+                        -(((tmp_block.transform.localScale.y + blocksDistance.y) * i) + additionalOffset.y + (tmp_block.transform.localScale.y / 2))
+                    );
+
+                blocks.Add(tmp_block);
+            }
+        }
+    }
+
+    private List<Vector2> getAutoPoints()
     {
         List<Vector2> points = new List<Vector2>();
 

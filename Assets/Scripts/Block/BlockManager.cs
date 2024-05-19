@@ -24,10 +24,12 @@ public class BlockManager : MonoBehaviour
     public Vector2 blockScale;
 
     [Tooltip("Автоматически распределять блоки по полю")]
-    public bool autoPlaceMode = true;
+    public bool autoPlaceMode;
 
+    [ConditionalHide(nameof(autoPlaceMode), true, false)]
     [Tooltip("Количество блоков")]
     public uint blocksAmount;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

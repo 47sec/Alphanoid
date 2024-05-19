@@ -21,7 +21,10 @@ public class BlockManager : MonoBehaviour
     public RectTransform blocksField;
 
     [Tooltip("Размер блоков")]
-    public Vector2 scale;
+    public Vector2 blockScale;
+
+    [Tooltip("Автоматически распределять блоки по полю")]
+    public bool autoPlaceMode = true;
 
     [Tooltip("Количество блоков")]
     public uint blocksAmount;
@@ -32,7 +35,7 @@ public class BlockManager : MonoBehaviour
         for (int i = 0; i < blocksAmount; i++)
         {
             blocks.Add(Instantiate(sampleBlock));
-            blocks[i].transform.localScale = scale * sampleBlock.transform.localScale;
+            blocks[i].transform.localScale = blockScale * sampleBlock.transform.localScale;
         }
 
         List<Vector2> points = getPoints();

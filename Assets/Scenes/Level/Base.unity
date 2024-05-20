@@ -1051,7 +1051,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -499, y: -226}
+  m_AnchoredPosition: {x: -460, y: -210.552}
   m_SizeDelta: {x: 2.0244, y: 0.934}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1255928787
@@ -1479,7 +1479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -499.00003, y: -191.548}
+  m_AnchoredPosition: {x: -460, y: -176.1}
   m_SizeDelta: {x: 2.0244, y: 0.934}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1588109999
@@ -1805,10 +1805,10 @@ MonoBehaviour:
   blocksField: {fileID: 2095286953}
   blockScale: {x: 1, y: 0.5}
   autoPlaceMode: 0
-  blocksAmount: 80
-  blocksRowsNumber: {x: 10, y: 5}
-  blocksDistance: {x: 0.1, y: 0.1}
-  additionalOffset: {x: 0, y: 0}
+  blocksAmount: 104
+  blocksRowsNumber: {x: 11, y: 10}
+  blocksDistance: {x: 0.05, y: 0.05}
+  additionalOffset: {x: 0.05, y: 0}
 --- !u!1 &2036193746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1838,7 +1838,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.13, y: 7.46, z: -0.031433232}
-  m_LocalScale: {x: 0.89911795, y: 0.46230787, z: 1}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2011032161}
@@ -1991,7 +1991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -499.00003, y: -262.75998}
+  m_AnchoredPosition: {x: -460.00003, y: -247.31198}
   m_SizeDelta: {x: 2.0244, y: 0.934}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2053805427

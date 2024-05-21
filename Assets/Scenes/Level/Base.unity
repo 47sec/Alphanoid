@@ -1807,8 +1807,8 @@ MonoBehaviour:
   blockScale: {x: 1, y: 0.5}
   autoPlaceMode: 0
   blocksAmount: 0
-  blocksRowsNumber: {x: 10, y: 10}
-  blocksDistance: {x: 0.5, y: 0.5}
+  blocksRowsNumber: {x: 5, y: 10}
+  blocksDistance: {x: 0.05, y: 0.05}
   additionalOffset: {x: 0, y: 0}
   alginmentType: 2
 --- !u!1 &2011032160
@@ -1860,6 +1860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocksFields:
   - {fileID: 2095286954}
+  - {fileID: 1823972636}
 --- !u!1 &2036193746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,7 +2238,7 @@ MonoBehaviour:
   autoPlaceMode: 0
   blocksAmount: 0
   blocksRowsNumber: {x: 3, y: 10}
-  blocksDistance: {x: 0.5, y: 0.5}
+  blocksDistance: {x: 0.05, y: 0.05}
   additionalOffset: {x: 0, y: 0}
   alginmentType: 0
 --- !u!1660057539 &9223372036854775807

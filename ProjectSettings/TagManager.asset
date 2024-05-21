@@ -9,6 +9,7 @@ TagManager:
   - This Wall
   - This Left Wall
   - This Right Wall
+  - BlockManager
   - Scored
   layers:
   - Default

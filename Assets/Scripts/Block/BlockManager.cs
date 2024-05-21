@@ -27,7 +27,7 @@ public class BlockManager : MonoBehaviour
     {
     }
 
-    private void DestroyBlock(Block block)
+    public void DestroyBlock(Block block)
     {
         foreach(var field in blocksFields)
         {

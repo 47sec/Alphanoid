@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    public GameObject blockManager;
+    private BlockManager blockManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        blockManager = GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>();
     }
 
     // Update is called once per frame
@@ -20,9 +20,7 @@ public class Block : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hit"))
         {
-            //transform.position = new Vector2(10, 10);
-            //Destroy(transform.gameObject);
-            blockManager.SendMessage("DestroyBlock", this);
+            blockManager.DestroyBlock(this);
             collision.gameObject.SendMessage("Scored", 1u);
         }
     }

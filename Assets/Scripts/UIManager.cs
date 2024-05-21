@@ -6,8 +6,8 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour
 {
-    [Tooltip("Полотно")]
-    public Canvas canvas;
+    [Tooltip("Группа панелей")]
+    public GameObject panelContainer;
 
     [Tooltip("Приставка перед названием панели")]
     public string prefix;
@@ -21,9 +21,9 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        for (int i = 0; i < canvas.transform.childCount; i++)
+        for (int i = 0; i < panelContainer.transform.childCount; i++)
         {
-            GameObject tmp = canvas.transform.GetChild(i).gameObject;
+            GameObject tmp = panelContainer.transform.GetChild(i).gameObject;
             panels.Add(tmp.name, tmp);
 
             if (tmp.activeSelf)

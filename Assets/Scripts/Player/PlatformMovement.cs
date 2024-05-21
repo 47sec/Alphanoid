@@ -48,10 +48,14 @@ public class PlatformMovement : MonoBehaviour
 
     }
 
-  private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        canMoveToLeft = true;
+        if (!other.CompareTag("Hit"))
+        {
 
-        canMoveToRight = true;
+            canMoveToLeft = true;
+
+            canMoveToRight = true;
+        }
     }
 }

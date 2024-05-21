@@ -50,6 +50,12 @@ public class BlocksField : MonoBehaviour
 
     private void autoPlace()
     {
+        if (blocksAmount == 0)
+        {
+            GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>().DestroyField(this);
+            return;
+        }
+
         for (int i = 0; i < blocksAmount; i++)
         {
             blocks.Add(Instantiate(sampleBlock, transform));
@@ -66,6 +72,12 @@ public class BlocksField : MonoBehaviour
 
     private void manualPlace()
     {
+        if (blocksRowsNumber.x * blocksRowsNumber.y == 0)
+        {
+            GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>().DestroyField(this);
+            return;
+        }
+
         switch (alginmentType)
         {
             case Alignment.Left:
@@ -190,17 +202,20 @@ public class BlocksField : MonoBehaviour
         return points;
     }
 
-    public bool DestroyBlock(Block block)
+    public bool Contains(Block block)
+    {
+        return blocks.Contains(block);
+    }
+
+    public void DestroyBlock(Block block)
     {
         //int blockId = blocks.FindIndex(int id => { id == block.GetInstanceID()});
-
+        
         blocks.Remove(block);
         Destroy(block.gameObject);
 
         if (blocks.Count == 0)
-            return true;
-        else
-            return false;
+            GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>().DestroyField(this);
     }
 
 }

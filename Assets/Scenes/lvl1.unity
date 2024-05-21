@@ -2003,6 +2003,14 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3256690724645710454, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
+      propertyPath: blocksAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256690724645710454, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
+      propertyPath: autoPlaceMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256690724645710454, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
       propertyPath: blocksRowsNumber.x
       value: 10
       objectReference: {fileID: 0}
@@ -2024,11 +2032,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6869072188899331580, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
       propertyPath: blocksRowsNumber.x
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6869072188899331580, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
       propertyPath: blocksRowsNumber.y
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7579467286132999381, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
       propertyPath: m_LocalPosition.x

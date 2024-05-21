@@ -27,14 +27,20 @@ public class BlockManager : MonoBehaviour
     {
     }
 
+    public void DestroyField(BlocksField field)
+    {
+        blocksFields.Remove(field);
+        Destroy(field.gameObject);
+    }
+
     public void DestroyBlock(Block block)
     {
         foreach(var field in blocksFields)
         {
-            if (field.DestroyBlock(block))
+            if (field.Contains(block))
             {
-                blocksFields.Remove(field);
-                Destroy(field.gameObject);
+                field.DestroyBlock(block);
+                break;
             }
         }
 

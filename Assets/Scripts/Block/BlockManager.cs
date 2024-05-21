@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class BlockManager : MonoBehaviour
 {
+    public enum Alignment { Left, Center, Right};
+
     private List<GameObject> blocks = new List<GameObject>();
 
     [Tooltip("Макет блока")]
@@ -38,6 +40,10 @@ public class BlockManager : MonoBehaviour
     [Tooltip("Отступы")]
     public Vector2 additionalOffset;
 
+    [ConditionalHide(nameof(autoPlaceMode), false, true)]
+    [Tooltip("Выравнивание блоков")]
+    public Alignment alginmentType;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -65,8 +71,24 @@ public class BlockManager : MonoBehaviour
 
     private void manualPlace()
     {
-        Vector2 leftTopPoint = blocksField.offsetMax - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0);
+        switch (alginmentType)
+        {
+            case Alignment.Left:
+                manualPlaceLeft();
+                break;
+            case Alignment.Center:
+                manualPlaceCenter();
+                break;
+            case Alignment.Right:
+                manualPlaceRight();
+                break;
+        }
+    }
 
+    private void manualPlaceLeft()
+    {
+        Vector2 leftTopPoint = blocksField.offsetMax - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0) + additionalOffset 
+            + ((blockScale * sampleBlock.transform.localScale) / 2);
         for (int i = 0; i < blocksRowsNumber.y; i++)
         {
             for (int j = 0; j < blocksRowsNumber.x; j++)
@@ -75,8 +97,59 @@ public class BlockManager : MonoBehaviour
                 tmp_block.transform.localScale = blockScale * sampleBlock.transform.localScale;
                 tmp_block.transform.position = leftTopPoint + new Vector2
                     (
-                        ((tmp_block.transform.localScale.x + blocksDistance.x) * j) + additionalOffset.x + (tmp_block.transform.localScale.x / 2),
+                        (tmp_block.transform.localScale.x + blocksDistance.x) * j,
+                        -((tmp_block.transform.localScale.y + blocksDistance.y) * i)
+                    );
+
+                blocks.Add(tmp_block);
+            }
+        }
+    }
+
+    private void manualPlaceCenter()
+    {
+        Vector2 centerTopPoint = blocksField.offsetMax - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0) + additionalOffset;
+
+        Vector2 localBlockScale = blockScale * sampleBlock.transform.localScale;
+
+        float odd = ((int)(blocksRowsNumber.x) % 2 == 0 ? 1f : 0f) / 2;
+
+        Vector2 startPoint = centerTopPoint - new Vector2((int)(blocksRowsNumber.x / 2) * (localBlockScale.x + blocksDistance.x) - (odd * (localBlockScale.x + blocksDistance.x)), 0);
+        // Половина количества блоков * ширина блока(нечётное)
+        // (Половина количества блоков * ширина блока) + половина ширины блока(чётное)
+
+        for (int i = 0; i < blocksRowsNumber.y; i++)
+        {
+            for (int j = 0; j < blocksRowsNumber.x; j++)
+            {
+                GameObject tmp_block = Instantiate(sampleBlock);
+                tmp_block.transform.localScale = localBlockScale;
+
+                tmp_block.transform.position = startPoint + new Vector2
+                    (
+                        ((tmp_block.transform.localScale.x + blocksDistance.x) * j),
                         -(((tmp_block.transform.localScale.y + blocksDistance.y) * i) + additionalOffset.y + (tmp_block.transform.localScale.y / 2))
+                    );
+                blocks.Add(tmp_block);
+            }
+        }
+    }
+
+    private void manualPlaceRight()
+    {
+        Vector2 rightTopPoint = blocksField.offsetMax + additionalOffset + ((blockScale * sampleBlock.transform.localScale) / 2);
+
+
+        for (int i = 0; i < blocksRowsNumber.y; i++)
+        {
+            for (int j = 0; j < blocksRowsNumber.x; j++)
+            {
+                GameObject tmp_block = Instantiate(sampleBlock);
+                tmp_block.transform.localScale = blockScale * sampleBlock.transform.localScale;
+                tmp_block.transform.position = rightTopPoint + new Vector2
+                    (
+                        -((tmp_block.transform.localScale.x + blocksDistance.x) * j),
+                        -((tmp_block.transform.localScale.y + blocksDistance.y) * i)
                     );
 
                 blocks.Add(tmp_block);

@@ -1806,9 +1806,10 @@ MonoBehaviour:
   blockScale: {x: 1, y: 0.5}
   autoPlaceMode: 0
   blocksAmount: 104
-  blocksRowsNumber: {x: 11, y: 10}
+  blocksRowsNumber: {x: 7, y: 10}
   blocksDistance: {x: 0.05, y: 0.05}
-  additionalOffset: {x: 0.05, y: 0}
+  additionalOffset: {x: 0, y: 0}
+  alginmentType: 1
 --- !u!1 &2036193746
 GameObject:
   m_ObjectHideFlags: 0

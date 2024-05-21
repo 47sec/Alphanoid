@@ -87,8 +87,9 @@ public class BlockManager : MonoBehaviour
 
     private void manualPlaceLeft()
     {
-        Vector2 leftTopPoint = blocksField.offsetMax - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0) + additionalOffset 
-            + ((blockScale * sampleBlock.transform.localScale) / 2);
+        //Слева сверху
+        Vector2 leftTopPoint = blocksField.offsetMax - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0) + additionalOffset
+            + new Vector2((blockScale.x * sampleBlock.transform.localScale.x) / 2, -(blockScale.y * sampleBlock.transform.localScale.y) / 2);
         for (int i = 0; i < blocksRowsNumber.y; i++)
         {
             for (int j = 0; j < blocksRowsNumber.x; j++)
@@ -108,12 +109,14 @@ public class BlockManager : MonoBehaviour
 
     private void manualPlaceCenter()
     {
+        //Центр сверху
         Vector2 centerTopPoint = blocksField.offsetMax - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0) + additionalOffset;
 
         Vector2 localBlockScale = blockScale * sampleBlock.transform.localScale;
 
         float odd = ((int)(blocksRowsNumber.x) % 2 == 0 ? 1f : 0f) / 2;
 
+        //Точка, откуда начнётся постройка (левее центра)
         Vector2 startPoint = centerTopPoint - new Vector2((int)(blocksRowsNumber.x / 2) * (localBlockScale.x + blocksDistance.x) - (odd * (localBlockScale.x + blocksDistance.x)), 0);
         // Половина количества блоков * ширина блока(нечётное)
         // (Половина количества блоков * ширина блока) + половина ширины блока(чётное)
@@ -137,7 +140,9 @@ public class BlockManager : MonoBehaviour
 
     private void manualPlaceRight()
     {
-        Vector2 rightTopPoint = blocksField.offsetMax + additionalOffset + ((blockScale * sampleBlock.transform.localScale) / 2);
+        //Справа сверху
+        Vector2 rightTopPoint = blocksField.offsetMax + additionalOffset 
+            - ((blockScale * sampleBlock.transform.localScale) / 2);
 
 
         for (int i = 0; i < blocksRowsNumber.y; i++)

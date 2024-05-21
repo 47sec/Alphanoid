@@ -1997,7 +1997,7 @@ PrefabInstance:
     - target: {fileID: 3256690724645710454, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
       propertyPath: sampleBlock
       value: 
-      objectReference: {fileID: 9007888294617814651, guid: 5ab4da7809883cb4a8b93836c2882438, type: 3}
+      objectReference: {fileID: 8050015025288809420, guid: 5ab4da7809883cb4a8b93836c2882438, type: 3}
     - target: {fileID: 3256690724645710454, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
       propertyPath: blockScale.y
       value: 0.5
@@ -2013,10 +2013,14 @@ PrefabInstance:
     - target: {fileID: 6869072188899331580, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
       propertyPath: sampleBlock
       value: 
-      objectReference: {fileID: 9007888294617814651, guid: 5ab4da7809883cb4a8b93836c2882438, type: 3}
+      objectReference: {fileID: 8050015025288809420, guid: 5ab4da7809883cb4a8b93836c2882438, type: 3}
     - target: {fileID: 6869072188899331580, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
       propertyPath: blockScale.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869072188899331580, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
+      propertyPath: alginmentType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6869072188899331580, guid: 0d7e5d5892e9fee4f8ffb04370bdd5c9, type: 3}
       propertyPath: blocksRowsNumber.x

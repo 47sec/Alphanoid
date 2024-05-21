@@ -5,13 +5,13 @@ using UnityEngine.Rendering.Universal;
 
 public class BlocksField : MonoBehaviour
 {
-    private List<GameObject> blocks = new List<GameObject>();
+    private List<Block> blocks = new List<Block>();
     private RectTransform blocksField;
 
     public enum Alignment { Left, Center, Right };
 
     [Tooltip("Макет блока")]
-    public GameObject sampleBlock;
+    public Block sampleBlock;
 
     [Tooltip("Размер блоков")]
     public Vector2 blockScale;
@@ -89,7 +89,7 @@ public class BlocksField : MonoBehaviour
         {
             for (int j = 0; j < blocksRowsNumber.x; j++)
             {
-                GameObject tmp_block = Instantiate(sampleBlock, transform);
+                Block tmp_block = Instantiate(sampleBlock, transform);
                 tmp_block.transform.localScale = blockScale * sampleBlock.transform.localScale;
                 tmp_block.transform.position = leftTopPoint + new Vector2
                     (
@@ -120,7 +120,7 @@ public class BlocksField : MonoBehaviour
         {
             for (int j = 0; j < blocksRowsNumber.x; j++)
             {
-                GameObject tmp_block = Instantiate(sampleBlock, transform);
+                Block tmp_block = Instantiate(sampleBlock, transform);
                 tmp_block.transform.localScale = localBlockScale;
 
                 tmp_block.transform.position = startPoint + new Vector2
@@ -144,7 +144,7 @@ public class BlocksField : MonoBehaviour
         {
             for (int j = 0; j < blocksRowsNumber.x; j++)
             {
-                GameObject tmp_block = Instantiate(sampleBlock, transform);
+                Block tmp_block = Instantiate(sampleBlock, transform);
                 tmp_block.transform.localScale = blockScale * sampleBlock.transform.localScale;
                 tmp_block.transform.position = rightTopPoint + new Vector2
                     (
@@ -194,7 +194,7 @@ public class BlocksField : MonoBehaviour
     {
         //int blockId = blocks.FindIndex(int id => { id == block.GetInstanceID()});
 
-        blocks.Remove(block.gameObject);
+        blocks.Remove(block);
         Destroy(block.gameObject);
 
         if (blocks.Count == 0)

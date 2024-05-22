@@ -146,70 +146,52 @@ public class BlocksField : MonoBehaviour
         switch (alginmentType)
         {
             case Alignment.Left:
-                placeLeft();
-                break;
+                {
+                    Vector2 leftTopPoint = blocksField.offsetMax
+                        - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0)
+                        + additionalOffset
+                        + new Vector2(blockScale.x / 2, -blockScale.y / 2);
+                    placeAllRows(leftTopPoint, Vector2.right, 0);
+                    break;
+                }
             case Alignment.Center:
-                placeCenter();
-                break;
+                {
+                    Vector2 centerTopPoint = blocksField.offsetMax
+                        - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0)
+                        + additionalOffset
+                        + new Vector2(0, -blockScale.y / 2);
+                    placeAllRows(centerTopPoint, Vector2.right, 1);
+                    break;
+                }
             case Alignment.Right:
-                placeRight();
-                break;
+                {
+                    Vector2 rightTopPoint = blocksField.offsetMax + additionalOffset - (blockScale / 2);
+                    placeAllRows(rightTopPoint, Vector2.left, 0);
+                    break;
+                }
         }
     }
 
-    private void placeLeft()
+    private void placeAllRows(Vector2 startingPoint, Vector2 dir, uint center)
     {
         for (int i = 0; i < rows.Count; i++)
         {
-            Vector2 startPoint = blocksField.offsetMax
-                - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0)
-                + additionalOffset
-                + new Vector2(blockScale.x / 2, -blockScale.y / 2)
-                + new Vector2(0, (blockScale.y + blocksDistance.y) * i) * Vector2.down;
-            placeRow(startPoint, Vector2.right, rows[i]);
+            Vector2 rowPoint = startingPoint
+                + new Vector2(0, blockScale.y + blocksDistance.y) * i * (Vector2.down + Vector2.right);
+            placeRow(rowPoint, dir, rows[i], center);
         }
     }
 
-    private void placeCenter()
-    {
-        //Центр сверху
-        Vector2 centerTopPoint = blocksField.offsetMax 
-            - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0) 
-            + additionalOffset
-            + new Vector2(0, -blockScale.y / 2);
-
-        for (int i = 0; i < rows.Count; i++)
-        {
-            float odd = (rows[i] % 2 == 0 ? 1f : 0f) / 2;
-            Vector2 startPoint = centerTopPoint 
-                - new Vector2((int)(rows[i] / 2) * (blockScale.x + blocksDistance.x) - (odd * (blockScale.x + blocksDistance.x)), 0)
-                + new Vector2(0, (blockScale.y + blocksDistance.y) * i) * Vector2.down;
-            // Половина количества блоков * ширина блока(нечётное)
-            // (Половина количества блоков * ширина блока) + половина ширины блока(чётное)
-
-            placeRow(startPoint, Vector2.right, rows[i]);
-        }
-    }
-
-    private void placeRight()
-    {
-        for (int i = 0; i < rows.Count; i++)
-        {
-            Vector2 startPoint = blocksField.offsetMax 
-                + additionalOffset - (blockScale / 2) 
-                + new Vector2(0, (blockScale.y + blocksDistance.y) * i) * Vector2.down;
-            placeRow(startPoint, Vector2.left, rows[i]);
-        }
-    }
-
-    private void placeRow(Vector2 startingPoint, Vector2 dir, uint amount)
+    private void placeRow(Vector2 startingPoint, Vector2 dir, uint amount, uint center)
     {
         for (int i = 0; i < amount; i++)
         {
+            float odd = (amount % 2 == 0 ? 1f : 0f) / 2;
             Block tmp_block = Instantiate(getRandomBlock(), transform);
             tmp_block.transform.localScale = blockScale;
-            tmp_block.transform.position = startingPoint 
-                + new Vector2(dir.x * ((blockScale.x + blocksDistance.x) * i), 0);
+            tmp_block.transform.position = startingPoint
+                + new Vector2(dir.x * ((blockScale.x + blocksDistance.x) * i), 0)
+                - new Vector2((int)(amount / 2) * (blockScale.x + blocksDistance.x) - (odd * (blockScale.x + blocksDistance.x)), 0) * center;
 
             blocks.Add(tmp_block);
         }

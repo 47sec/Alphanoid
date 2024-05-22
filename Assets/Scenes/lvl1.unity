@@ -699,7 +699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: alginmentType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: autoPlaceMode
@@ -727,11 +727,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: blocksRowsNumber.x
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: blocksRowsNumber.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: 'rows.Array.data[0]'
@@ -1518,7 +1518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: alginmentType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: rows.Array.size

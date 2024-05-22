@@ -148,24 +148,26 @@ public class BlocksField : MonoBehaviour
             case Alignment.Left:
                 {
                     Vector2 leftTopPoint = blocksField.offsetMax
-                        - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0)
+                        - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0) // Точка слева сверху
                         + additionalOffset
-                        + new Vector2(blockScale.x / 2, -blockScale.y / 2);
+                        + new Vector2(blockScale.x / 2, -blockScale.y / 2); // Отступ на половину ширины блока
                     placeAllRows(leftTopPoint, Vector2.right, 0);
                     break;
                 }
             case Alignment.Center:
                 {
                     Vector2 centerTopPoint = blocksField.offsetMax
-                        - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0)
+                        - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0) // Точка по центру сверху
                         + additionalOffset
-                        + new Vector2(0, -blockScale.y / 2);
+                        + new Vector2(0, -blockScale.y / 2); // Отступ на половину ширины блока
                     placeAllRows(centerTopPoint, Vector2.right, 1);
                     break;
                 }
             case Alignment.Right:
                 {
-                    Vector2 rightTopPoint = blocksField.offsetMax + additionalOffset - (blockScale / 2);
+                    Vector2 rightTopPoint = blocksField.offsetMax // Точка справа сверху
+                        + additionalOffset
+                        - (blockScale / 2); // Отступ на половину ширины блока
                     placeAllRows(rightTopPoint, Vector2.left, 0);
                     break;
                 }
@@ -177,7 +179,7 @@ public class BlocksField : MonoBehaviour
         for (int i = 0; i < rows.Count; i++)
         {
             Vector2 rowPoint = startingPoint
-                + new Vector2(0, blockScale.y + blocksDistance.y) * i * (Vector2.down + Vector2.right);
+                + new Vector2(0, blockScale.y + blocksDistance.y) * i * Vector2.down; // Изменения высоты для каждого ряда
             placeRow(rowPoint, dir, rows[i], center);
         }
     }
@@ -186,12 +188,12 @@ public class BlocksField : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            float odd = (amount % 2 == 0 ? 1f : 0f) / 2;
+            float odd = (amount % 2 == 0 ? 1f : 0f) / 2; // Фигня для выравнивания по центру
             Block tmp_block = Instantiate(getRandomBlock(), transform);
             tmp_block.transform.localScale = blockScale;
             tmp_block.transform.position = startingPoint
-                + new Vector2(dir.x * ((blockScale.x + blocksDistance.x) * i), 0)
-                - new Vector2((int)(amount / 2) * (blockScale.x + blocksDistance.x) - (odd * (blockScale.x + blocksDistance.x)), 0) * center;
+                + new Vector2(dir.x * ((blockScale.x + blocksDistance.x) * i), 0) // Изменения координат для каждого отдельного блока
+                - new Vector2((int)(amount / 2) * (blockScale.x + blocksDistance.x) - (odd * (blockScale.x + blocksDistance.x)), 0) * center; // Фигня для выравнивания по центру
 
             blocks.Add(tmp_block);
         }

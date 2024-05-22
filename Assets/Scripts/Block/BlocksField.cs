@@ -72,7 +72,7 @@ public class BlocksField : MonoBehaviour
                 semiAutoPlace();
                 break;
             case Mode.SemiManual:
-                semiManualPlace();
+                place();
                 break;
         }
 
@@ -138,11 +138,6 @@ public class BlocksField : MonoBehaviour
         for (int i = 0; i < blocksRowsNumber.y; i++)
             rows.Add((uint)blocksRowsNumber.x);
 
-        place();
-    }
-
-    private void semiManualPlace()
-    {
         place();
     }
 

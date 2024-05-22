@@ -5,57 +5,62 @@ using UnityEngine.Rendering.Universal;
 
 public class BlocksField : MonoBehaviour
 {
-    private List<Block> blocks = new List<Block>();
     private RectTransform blocksField;
+    private List<Block> blocks = new List<Block>();
 
+    public enum Mode { FullAuto, SemiAuto, Manual};
     public enum Alignment { Left, Center, Right };
 
+    public Mode mode;
+
+    [ConditionalEnumHide(nameof(mode), (int)Mode.FullAuto, (int)Mode.SemiAuto, HideInInspector = true)]
     [Tooltip("Макет блока")]
     public Block sampleBlock;
 
+    [ConditionalEnumHide(nameof(mode), (int)Mode.FullAuto, (int)Mode.SemiAuto, HideInInspector = true)]
     [Tooltip("Размер блоков")]
     public Vector2 blockScale;
 
-    [Tooltip("Автоматическое распределение блоков по полю")]
-    public bool autoPlaceMode;
-
-    [ConditionalHide(nameof(autoPlaceMode), true)]
+    [ConditionalEnumHide(nameof(mode), (int)Mode.FullAuto, HideInInspector = true)]
     [Tooltip("Количество блоков")]
     public uint blocksAmount = 0;
 
-    [ConditionalHide(nameof(autoPlaceMode), false, true)]
+    [ConditionalEnumHide(nameof(mode), (int)Mode.SemiAuto, HideInInspector = true)]
     [Tooltip("Количество рядов и строк блоков")]
     public Vector2 blocksRowsNumber;
 
-    [ConditionalHide(nameof(autoPlaceMode), false, true)]
+    [ConditionalEnumHide(nameof(mode), (int)Mode.SemiAuto, HideInInspector = true)]
     [Tooltip("Расстояние между блоками (без учёта размера блока)")]
     public Vector2 blocksDistance;
 
-    [ConditionalHide(nameof(autoPlaceMode), false, true)]
+    [ConditionalEnumHide(nameof(mode), (int)Mode.SemiAuto, HideInInspector = true)]
     [Tooltip("Отступы")]
     public Vector2 additionalOffset;
 
-    [ConditionalHide(nameof(autoPlaceMode), false, true)]
+    [ConditionalEnumHide(nameof(mode), (int)Mode.SemiAuto, HideInInspector = true)]
     [Tooltip("Выравнивание блоков")]
     public Alignment alginmentType;
 
-    public void Init()
+    public BlocksField Init()
     {
         blocksField = GetComponent<RectTransform>();
-        if (autoPlaceMode)
+
+        foreach (Transform child in transform)
+            blocks.Add(child.GetComponent<Block>());
+
+        if (mode == Mode.FullAuto)
             autoPlace();
-        else
-            manualPlace();
+        else if (mode == Mode.SemiAuto)
+            semiAutoPlace();
+
+        if (blocks.Count == 0)
+            GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>().DestroyField(this);
+        
+        return this;
     }
 
     private void autoPlace()
     {
-        if (blocksAmount == 0)
-        {
-            GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>().DestroyField(this);
-            return;
-        }
-
         for (int i = 0; i < blocksAmount; i++)
         {
             blocks.Add(Instantiate(sampleBlock, transform));
@@ -70,29 +75,23 @@ public class BlocksField : MonoBehaviour
         }
     }
 
-    private void manualPlace()
+    private void semiAutoPlace()
     {
-        if (blocksRowsNumber.x * blocksRowsNumber.y == 0)
-        {
-            GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>().DestroyField(this);
-            return;
-        }
-
         switch (alginmentType)
         {
             case Alignment.Left:
-                manualPlaceLeft();
+                semiAutoPlaceLeft();
                 break;
             case Alignment.Center:
-                manualPlaceCenter();
+                semiAutoPlaceCenter();
                 break;
             case Alignment.Right:
-                manualPlaceRight();
+                semiAutoPlaceRight();
                 break;
         }
     }
 
-    private void manualPlaceLeft()
+    private void semiAutoPlaceLeft()
     {
         //Слева сверху
         Vector2 leftTopPoint = blocksField.offsetMax - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0) + additionalOffset
@@ -114,7 +113,7 @@ public class BlocksField : MonoBehaviour
         }
     }
 
-    private void manualPlaceCenter()
+    private void semiAutoPlaceCenter()
     {
         //Центр сверху
         Vector2 centerTopPoint = blocksField.offsetMax - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0) + additionalOffset;
@@ -145,7 +144,7 @@ public class BlocksField : MonoBehaviour
         }
     }
 
-    private void manualPlaceRight()
+    private void semiAutoPlaceRight()
     {
         //Справа сверху
         Vector2 rightTopPoint = blocksField.offsetMax + additionalOffset

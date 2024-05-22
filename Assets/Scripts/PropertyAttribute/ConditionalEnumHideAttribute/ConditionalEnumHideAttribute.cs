@@ -14,6 +14,7 @@ public class ConditionalEnumHideAttribute : PropertyAttribute
 
     public int EnumValue1 = 0;
     public int EnumValue2 = 0;
+    public int EnumValue3 = 0;
 
     public bool HideInInspector = false;
     public bool Inverse = false;
@@ -23,6 +24,7 @@ public class ConditionalEnumHideAttribute : PropertyAttribute
         this.ConditionalSourceField = conditionalSourceField;
         this.EnumValue1 = enumValue1;
         this.EnumValue2 = enumValue1;
+        this.EnumValue3 = enumValue1;
     }
 
     public ConditionalEnumHideAttribute(string conditionalSourceField, int enumValue1, int enumValue2)
@@ -30,5 +32,14 @@ public class ConditionalEnumHideAttribute : PropertyAttribute
         this.ConditionalSourceField = conditionalSourceField;
         this.EnumValue1 = enumValue1;
         this.EnumValue2 = enumValue2;
+        this.EnumValue3 = enumValue1;
+    }
+
+    public ConditionalEnumHideAttribute(string conditionalSourceField, int enumValue1, int enumValue2, int enumValue3)
+    {
+        this.ConditionalSourceField = conditionalSourceField;
+        this.EnumValue1 = enumValue1;
+        this.EnumValue2 = enumValue2;
+        this.EnumValue3 = enumValue3;
     }
 }

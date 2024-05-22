@@ -164,78 +164,59 @@ public class BlocksField : MonoBehaviour
 
     private void placeLeft()
     {
-        //Слева сверху
-        Vector2 leftTopPoint = blocksField.offsetMax - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0) + additionalOffset
-            + new Vector2(blockScale.x / 2, -blockScale.y / 2);
-
         for (int i = 0; i < rows.Count; i++)
         {
-            for (int j = 0; j < rows[i]; j++)
-            {
-                Block tmp_block = Instantiate(getRandomBlock(), transform);
-                tmp_block.transform.localScale *= blockScale;
-                tmp_block.transform.position = leftTopPoint + new Vector2
-                    (
-                        (tmp_block.transform.localScale.x + blocksDistance.x) * j,
-                        -((tmp_block.transform.localScale.y + blocksDistance.y) * i)
-                    );
-                blocks.Add(tmp_block);
-            }
+            Vector2 startPoint = blocksField.offsetMax
+                - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0)
+                + additionalOffset
+                + new Vector2(blockScale.x / 2, -blockScale.y / 2)
+                + new Vector2(0, (blockScale.y + blocksDistance.y) * i) * Vector2.down;
+            placeRow(startPoint, Vector2.right, rows[i]);
         }
     }
 
     private void placeCenter()
     {
         //Центр сверху
-        Vector2 centerTopPoint = blocksField.offsetMax - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0) + additionalOffset;
-
-        Vector2 localBlockScale = blockScale;
-
+        Vector2 centerTopPoint = blocksField.offsetMax 
+            - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0) 
+            + additionalOffset
+            + new Vector2(0, -blockScale.y / 2);
 
         for (int i = 0; i < rows.Count; i++)
         {
             float odd = (rows[i] % 2 == 0 ? 1f : 0f) / 2;
-
-            //Точка, откуда начнётся постройка (левее центра)
-            Vector2 startPoint = centerTopPoint - new Vector2((int)(rows[i] / 2) * (localBlockScale.x + blocksDistance.x) - (odd * (localBlockScale.x + blocksDistance.x)), 0);
+            Vector2 startPoint = centerTopPoint 
+                - new Vector2((int)(rows[i] / 2) * (blockScale.x + blocksDistance.x) - (odd * (blockScale.x + blocksDistance.x)), 0)
+                + new Vector2(0, (blockScale.y + blocksDistance.y) * i) * Vector2.down;
             // Половина количества блоков * ширина блока(нечётное)
             // (Половина количества блоков * ширина блока) + половина ширины блока(чётное)
 
-            for (int j = 0; j < rows[i]; j++)
-            {
-                Block tmp_block = Instantiate(getRandomBlock(), transform);
-                tmp_block.transform.localScale = localBlockScale;
-
-                tmp_block.transform.position = startPoint + new Vector2
-                    (
-                        ((tmp_block.transform.localScale.x + blocksDistance.x) * j),
-                        -(((tmp_block.transform.localScale.y + blocksDistance.y) * i) + additionalOffset.y + (tmp_block.transform.localScale.y / 2))
-                    );
-                blocks.Add(tmp_block);
-            }
+            placeRow(startPoint, Vector2.right, rows[i]);
         }
     }
 
     private void placeRight()
     {
-        //Справа сверху
-        Vector2 rightTopPoint = blocksField.offsetMax + additionalOffset - (blockScale / 2);
-
-
         for (int i = 0; i < rows.Count; i++)
         {
-            for (int j = 0; j < rows[i]; j++)
-            {
-                Block tmp_block = Instantiate(getRandomBlock(), transform);
-                tmp_block.transform.localScale *= blockScale;
-                tmp_block.transform.position = rightTopPoint + new Vector2
-                    (
-                        -((tmp_block.transform.localScale.x + blocksDistance.x) * j),
-                        -((tmp_block.transform.localScale.y + blocksDistance.y) * i)
-                    );
+            Vector2 startPoint = blocksField.offsetMax 
+                + additionalOffset - (blockScale / 2) 
+                + new Vector2(0, (blockScale.y + blocksDistance.y) * i) * Vector2.down;
+            placeRow(startPoint, Vector2.left, rows[i]);
+        }
+    }
 
-                blocks.Add(tmp_block);
-            }
+    private void placeRow(Vector2 startingPoint, Vector2 dir, uint amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            Block tmp_block = Instantiate(getRandomBlock(), transform);
+            tmp_block.transform.localScale = blockScale;
+            tmp_block.transform.position = startingPoint 
+                + new Vector2(dir.x * ((blockScale.x + blocksDistance.x) * i), 0);
+
+            blocks.Add(tmp_block);
         }
     }
 

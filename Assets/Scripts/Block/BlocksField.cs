@@ -2,6 +2,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine.Rendering.Universal;
+using System;
+using NUnit.Framework.Internal;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 
 public class BlocksField : MonoBehaviour
 {
@@ -14,8 +18,8 @@ public class BlocksField : MonoBehaviour
     public Mode mode;
 
     [ConditionalEnumHide(nameof(mode), (int)Mode.FullAuto, (int)Mode.SemiAuto, (int)Mode.SemiManual, HideInInspector = true)]
-    [Tooltip("Макет блока")]
-    public Block sampleBlock;
+    [Tooltip("Макет блоков")]
+    public List<Block> sampleBlocks = new List<Block>();
 
     [ConditionalEnumHide(nameof(mode), (int)Mode.FullAuto, (int)Mode.SemiAuto, (int)Mode.SemiManual, HideInInspector = true)]
     [Tooltip("Размер блоков")]
@@ -43,11 +47,13 @@ public class BlocksField : MonoBehaviour
     [ConditionalEnumHide(nameof(mode), (int)Mode.SemiAuto, HideInInspector = true)]
     [Tooltip("Количество рядов и строк блоков")]
     public Vector2 blocksRowsNumber;
-    
-    
+
+
     [ConditionalEnumHide(nameof(mode), (int)Mode.SemiManual, HideInInspector = true)]
     [Tooltip("Ручное настраивание кол-ва блоков в рядах (только в Semi-Manual режиме)")]
     public List<uint> rows = new List<uint>();
+
+    private Randomizer RNG = Randomizer.CreateRandomizer();
 
     public BlocksField Init()
     {
@@ -55,6 +61,7 @@ public class BlocksField : MonoBehaviour
 
         foreach (Transform child in transform)
             blocks.Add(child.GetComponent<Block>());
+        fixChances();
 
         switch (mode)
         {
@@ -73,15 +80,47 @@ public class BlocksField : MonoBehaviour
         if (blocks.Count == 0)
             GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>().DestroyField(this);
 
+
         return this;
+    }
+
+    private void fixChances()
+    {
+        float sum = 0;
+        foreach (var block in sampleBlocks)
+        {
+            sum += block.chanceMod;
+        }
+
+        foreach (var block in sampleBlocks)
+        {
+            block.setRelativeChance(sum);
+        }
+
+        sampleBlocks.Sort((x, y) => y.relativeChance.CompareTo(x.relativeChance));
+    }
+
+    Block getRandomBlock()
+    {
+        float rnd = (float)RNG.NextDouble();
+        foreach (var block in sampleBlocks)
+        {
+            if (rnd < block.relativeChance)
+            {
+                return block;
+            }
+            rnd -= block.relativeChance;
+        }
+
+        return sampleBlocks[0];
     }
 
     private void autoPlace()
     {
         for (int i = 0; i < blocksAmount; i++)
         {
-            blocks.Add(Instantiate(sampleBlock, transform));
-            blocks[i].transform.localScale = blockScale * sampleBlock.transform.localScale;
+            blocks.Add(Instantiate(getRandomBlock(), transform));
+            blocks[i].transform.localScale *= blockScale;
         }
 
         List<Vector2> points = getAutoPoints();
@@ -127,14 +166,14 @@ public class BlocksField : MonoBehaviour
     {
         //Слева сверху
         Vector2 leftTopPoint = blocksField.offsetMax - new Vector2(blocksField.offsetMax.x - blocksField.offsetMin.x, 0) + additionalOffset
-            + new Vector2((blockScale.x * sampleBlock.transform.localScale.x) / 2, -(blockScale.y * sampleBlock.transform.localScale.y) / 2);
+            + new Vector2(blockScale.x / 2, -blockScale.y / 2);
 
         for (int i = 0; i < rows.Count; i++)
         {
             for (int j = 0; j < rows[i]; j++)
             {
-                Block tmp_block = Instantiate(sampleBlock);
-                tmp_block.transform.localScale = blockScale * sampleBlock.transform.localScale;
+                Block tmp_block = Instantiate(getRandomBlock(), transform);
+                tmp_block.transform.localScale *= blockScale;
                 tmp_block.transform.position = leftTopPoint + new Vector2
                     (
                         (tmp_block.transform.localScale.x + blocksDistance.x) * j,
@@ -150,7 +189,7 @@ public class BlocksField : MonoBehaviour
         //Центр сверху
         Vector2 centerTopPoint = blocksField.offsetMax - new Vector2((blocksField.offsetMax.x - blocksField.offsetMin.x) / 2, 0) + additionalOffset;
 
-        Vector2 localBlockScale = blockScale * sampleBlock.transform.localScale;
+        Vector2 localBlockScale = blockScale;
 
 
         for (int i = 0; i < rows.Count; i++)
@@ -164,7 +203,7 @@ public class BlocksField : MonoBehaviour
 
             for (int j = 0; j < rows[i]; j++)
             {
-                Block tmp_block = Instantiate(sampleBlock, transform);
+                Block tmp_block = Instantiate(getRandomBlock(), transform);
                 tmp_block.transform.localScale = localBlockScale;
 
                 tmp_block.transform.position = startPoint + new Vector2
@@ -180,16 +219,15 @@ public class BlocksField : MonoBehaviour
     private void placeRight()
     {
         //Справа сверху
-        Vector2 rightTopPoint = blocksField.offsetMax + additionalOffset
-            - ((blockScale * sampleBlock.transform.localScale) / 2);
+        Vector2 rightTopPoint = blocksField.offsetMax + additionalOffset - (blockScale / 2);
 
 
         for (int i = 0; i < rows.Count; i++)
         {
             for (int j = 0; j < rows[i]; j++)
             {
-                Block tmp_block = Instantiate(sampleBlock, transform);
-                tmp_block.transform.localScale = blockScale * sampleBlock.transform.localScale;
+                Block tmp_block = Instantiate(getRandomBlock(), transform);
+                tmp_block.transform.localScale *= blockScale;
                 tmp_block.transform.position = rightTopPoint + new Vector2
                     (
                         -((tmp_block.transform.localScale.x + blocksDistance.x) * j),

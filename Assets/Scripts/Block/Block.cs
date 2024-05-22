@@ -4,9 +4,17 @@ public class Block : MonoBehaviour
 {
     private BlockManager blockManager;
 
+    [HideInInspector]
+    public float relativeChance;
+
+    [Tooltip("Модификатор шанса спавна блока")]
+    public float chanceMod;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        relativeChance = chanceMod;
         blockManager = GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>();
     }
 
@@ -14,6 +22,11 @@ public class Block : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void setRelativeChance(float sum)
+    {
+        relativeChance = chanceMod / sum;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

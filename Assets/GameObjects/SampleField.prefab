@@ -48,13 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 805c2cf0a79c68f40abfcd51a84cd93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  additionalBlocks: 0
-  blocks: []
-  sampleBlock: {fileID: 8050015025288809420, guid: ff53ecf101465534292f08c4d0591aa0, type: 3}
+  mode: 0
+  sampleBlocks:
+  - {fileID: 8050015025288809420, guid: ff53ecf101465534292f08c4d0591aa0, type: 3}
   blockScale: {x: 1, y: 1}
-  autoPlaceMode: 0
   blocksAmount: 1
-  blocksRowsNumber: {x: 1, y: 1}
   blocksDistance: {x: 0, y: 0}
   additionalOffset: {x: 0, y: 0}
   alginmentType: 0
+  blocksRowsNumber: {x: 1, y: 1}
+  rows: 

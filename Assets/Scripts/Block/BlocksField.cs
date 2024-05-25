@@ -6,40 +6,31 @@ using System;
 using NUnit.Framework.Internal;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
+using Array2DEditor;
 
 public class BlocksField : MonoBehaviour
 {
     private RectTransform blocksField;
     private List<Block> blocks = new List<Block>();
 
-    public enum Mode { FullAuto, SemiAuto, SemiManual, Manual };
+    public enum Mode { SemiAuto, SemiManual, Manual };
     public enum Alignment { Left, Center, Right };
 
     public Mode mode;
 
-    [ConditionalEnumHide(nameof(mode), (int)Mode.FullAuto, (int)Mode.SemiAuto, (int)Mode.SemiManual, HideInInspector = true)]
     [Tooltip("Макет блоков")]
     public List<Block> sampleBlocks = new List<Block>();
 
-    [ConditionalEnumHide(nameof(mode), (int)Mode.FullAuto, (int)Mode.SemiAuto, (int)Mode.SemiManual, HideInInspector = true)]
     [Tooltip("Размер блоков")]
     public Vector2 blockScale;
 
 
-    [ConditionalEnumHide(nameof(mode), (int)Mode.FullAuto, HideInInspector = true)]
-    [Tooltip("Количество блоков")]
-    public uint blocksAmount = 0;
-
-
-    [ConditionalEnumHide(nameof(mode), (int)Mode.SemiAuto, (int)Mode.SemiManual, HideInInspector = true)]
     [Tooltip("Расстояние между блоками (без учёта размера блока)")]
     public Vector2 blocksDistance;
 
-    [ConditionalEnumHide(nameof(mode), (int)Mode.SemiAuto, (int)Mode.SemiManual, HideInInspector = true)]
     [Tooltip("Отступы")]
     public Vector2 additionalOffset;
 
-    [ConditionalEnumHide(nameof(mode), (int)Mode.SemiAuto, (int)Mode.SemiManual, HideInInspector = true)]
     [Tooltip("Выравнивание блоков")]
     public Alignment alginmentType;
 
@@ -53,6 +44,10 @@ public class BlocksField : MonoBehaviour
     [Tooltip("Ручное настраивание кол-ва блоков в рядах (только в Semi-Manual режиме)")]
     public List<uint> rows = new List<uint>();
 
+    [ConditionalEnumHide(nameof(mode), (int)Mode.Manual, HideInInspector = true)]
+    [Tooltip("Расположение блоков")]
+    public Array2DBool mat = new Array2DBool();
+
     private Randomizer RNG = Randomizer.CreateRandomizer();
 
     public BlocksField Init()
@@ -65,15 +60,16 @@ public class BlocksField : MonoBehaviour
 
         switch (mode)
         {
-            case Mode.FullAuto:
-                autoPlace();
-                break;
             case Mode.SemiAuto:
                 semiAutoPlace();
                 break;
             case Mode.SemiManual:
                 place();
                 break;
+            case Mode.Manual:
+                manualPlace();
+                break;
+
         }
 
 
@@ -115,21 +111,53 @@ public class BlocksField : MonoBehaviour
         return sampleBlocks[0];
     }
 
-    private void autoPlace()
-    {
-        for (int i = 0; i < blocksAmount; i++)
-        {
-            blocks.Add(Instantiate(getRandomBlock(), transform));
-            blocks[i].transform.localScale *= blockScale;
-        }
+    //private void autoPlace()
+    //{
+    //    for (int i = 0; i < blocksAmount; i++)
+    //    {
+    //        blocks.Add(Instantiate(getRandomBlock(), transform));
+    //        blocks[i].transform.localScale *= blockScale;
+    //    }
 
-        List<Vector2> points = getAutoPoints();
+    //    List<Vector2> points = getAutoPoints();
 
-        for (int i = 0; i < blocks.Count; i++)
-        {
-            blocks[i].transform.position = points[i];
-        }
-    }
+    //    for (int i = 0; i < blocks.Count; i++)
+    //    {
+    //        blocks[i].transform.position = points[i];
+    //    }
+    //}
+    //private List<Vector2> getAutoPoints()
+    //{
+    //    List<Vector2> points = new List<Vector2>();
+
+    //    Vector2 max = blocksField.offsetMax;
+    //    Vector2 min = blocksField.offsetMin;
+    //    Vector2 distance = max - min;
+
+    //    // Формула отсюда: https://math.stackexchange.com/questions/1039482/how-to-evenly-space-a-number-of-points-in-a-rectangle
+    //    float y_points = Mathf.Sqrt((distance.x / distance.y) * blocksAmount + (((distance.x - distance.y) * (distance.x - distance.y)) / (4 * distance.y * distance.y)))
+    //        - ((distance.x - distance.y) / (2 * distance.y));
+
+    //    float x_points = (blocksAmount / y_points);
+
+    //    uint missingPoints = blocksAmount - (uint)(Mathf.Floor(x_points) * Mathf.Round(y_points));
+
+    //    if (missingPoints > 0)
+    //        y_points++;
+
+    //    for (uint i = 0; i < y_points; i++)
+    //    {
+    //        for (uint j = 0; j < x_points; j++)
+    //        {
+    //            float y_point = min.y + (0.5f + i) * (distance.y / y_points);
+    //            float x_point = min.x + (0.5f + j) * (distance.x / x_points);
+
+    //            points.Add(new Vector2(x_point, y_point));
+    //        }
+    //    }
+
+    //    return points;
+    //}
 
     private void semiAutoPlace()
     {
@@ -137,6 +165,16 @@ public class BlocksField : MonoBehaviour
 
         for (int i = 0; i < blocksRowsNumber.y; i++)
             rows.Add((uint)blocksRowsNumber.x);
+
+        place();
+    }
+
+    private void manualPlace()
+    {
+        rows.Clear();
+
+        for (int i = 0; i < mat.GridSize.y; i++)
+            rows.Add((uint)mat.GridSize.x);
 
         place();
     }
@@ -180,14 +218,17 @@ public class BlocksField : MonoBehaviour
         {
             Vector2 rowPoint = startingPoint
                 + new Vector2(0, blockScale.y + blocksDistance.y) * i * Vector2.down; // Изменения высоты для каждого ряда
-            placeRow(rowPoint, dir, rows[i], center);
+            placeRow(rowPoint, dir, rows[i], center, i);
         }
     }
 
-    private void placeRow(Vector2 startingPoint, Vector2 dir, uint amount, uint center)
+    private void placeRow(Vector2 startingPoint, Vector2 dir, uint amount, uint center, int rowNumber)
     {
         for (int i = 0; i < amount; i++)
         {
+            if (mode == Mode.Manual && !mat.GetCell(i, rowNumber))
+                continue;
+
             float odd = (amount % 2 == 0 ? 1f : 0f) / 2; // Фигня для выравнивания по центру
             Block tmp_block = Instantiate(getRandomBlock(), transform);
             tmp_block.transform.localScale = blockScale;
@@ -199,38 +240,6 @@ public class BlocksField : MonoBehaviour
         }
     }
 
-    private List<Vector2> getAutoPoints()
-    {
-        List<Vector2> points = new List<Vector2>();
-
-        Vector2 max = blocksField.offsetMax;
-        Vector2 min = blocksField.offsetMin;
-        Vector2 distance = max - min;
-
-        // Формула отсюда: https://math.stackexchange.com/questions/1039482/how-to-evenly-space-a-number-of-points-in-a-rectangle
-        float y_points = Mathf.Sqrt((distance.x / distance.y) * blocksAmount + (((distance.x - distance.y) * (distance.x - distance.y)) / (4 * distance.y * distance.y)))
-            - ((distance.x - distance.y) / (2 * distance.y));
-
-        float x_points = (blocksAmount / y_points);
-
-        uint missingPoints = blocksAmount - (uint)(Mathf.Floor(x_points) * Mathf.Round(y_points));
-
-        if (missingPoints > 0)
-            y_points++;
-
-        for (uint i = 0; i < y_points; i++)
-        {
-            for (uint j = 0; j < x_points; j++)
-            {
-                float y_point = min.y + (0.5f + i) * (distance.y / y_points);
-                float x_point = min.x + (0.5f + j) * (distance.x / x_points);
-
-                points.Add(new Vector2(x_point, y_point));
-            }
-        }
-
-        return points;
-    }
 
     public bool Contains(Block block)
     {

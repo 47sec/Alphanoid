@@ -52,9 +52,15 @@ MonoBehaviour:
   sampleBlocks:
   - {fileID: 8050015025288809420, guid: ff53ecf101465534292f08c4d0591aa0, type: 3}
   blockScale: {x: 1, y: 1}
-  blocksAmount: 1
   blocksDistance: {x: 0, y: 0}
   additionalOffset: {x: 0, y: 0}
   alginmentType: 0
   blocksRowsNumber: {x: 1, y: 1}
   rows: 
+  mat:
+    gridSize: {x: 3, y: 3}
+    cellSize: {x: 16, y: 16}
+    cells:
+    - row: 000000
+    - row: 000000
+    - row: 000000

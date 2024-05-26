@@ -16,26 +16,30 @@ public class PlatformPhysics : MonoBehaviour
     {
         switch (other.gameObject.tag)
         {
-            case "Hit":
+            case "Hit": //  Если платформа столкнулась с мячом
                 {
-                    Rigidbody2D ball_rb = other.attachedRigidbody;
+                   Rigidbody2D ball_rb = other.attachedRigidbody;
 
                     float distance = ball_rb.transform.position.x - transform.position.x;
+                    float direction_x = new Vector2(distance, 0).normalized.x; // Определяю направление по x
 
-                    float direction_x = new Vector2(distance, 0).normalized.x; // Сторона, в которую будет отскок
-
+                    //  значение center_clamp это значение с
+                    //  учетом расстояние до центра объект и ограничивается
+                    //  в определенном диапазоне после чего округляется и 
+                    //  корректируется в соответствии с направлением и расстоянием до центра
                     float center_clamp = Mathf.Floor(Mathf.Clamp(Mathf.Abs(distance) * centerSize, 0, 1)) * Mathf.Abs(distance) + 0.05f;
 
-                    ball_rb.velocity =
-                        (
-                            ball_rb.velocity *
-                            (new Vector2(0f, -1f)) +
-                            (new Vector2(center_clamp * direction_x * angleMod, 0f))
-                        ).normalized
-                        * (ball_rb.velocity / ball_rb.velocity.normalized);
+                    // рассчитываю скорость с учетом столкновения с центром
+                    Vector2 newVelocity =
+                        ball_rb.velocity *
+                        new Vector2(0f, -1f) +
+                        new Vector2(center_clamp * direction_x * angleMod, 0f);
+
+                    // Нормализую скорость если она НЕ нулевая
+                    if (newVelocity != Vector2.zero) { ball_rb.velocity = newVelocity.normalized * ball_rb.velocity.magnitude; }
+
                     break;
                 }
-            
         }
     }
 

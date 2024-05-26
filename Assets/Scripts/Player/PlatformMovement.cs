@@ -1,61 +1,44 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlatformMovement : MonoBehaviour
 {
+    [Tooltip("Левый барьер")]
+    public Transform leftWall;
+
+    [Tooltip("Правый барьер")]
+    public Transform rightWall;
+
     [Tooltip("Скорость платформы")]
     public float speed;
 
+    private float spriteWidth; //  Ширина платформы
 
-    private bool canMoveToLeft;
-    private bool canMoveToRight;
-
-    void Start()
+    float GetSpriteWidth(GameObject spriteObject)
     {
-        canMoveToLeft = true;
-        canMoveToRight = true;
+        //  Возвращаем размер по x через "SpriteRenderer"
+        return spriteObject.GetComponent<SpriteRenderer>().bounds.size.x;
     }
+
+    void Start() { spriteWidth = GetSpriteWidth(GameObject.Find("Player")); }
+
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.D) && canMoveToRight)
-        {
-            transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
-        }
+        float platformPositionX = transform.position.x; //  позиция платформы по X 
 
-        if (Input.GetKey(KeyCode.A) && canMoveToLeft)
+        if (Input.GetKey(KeyCode.A) &&
+            //   Смотрим что крайняя левая точна платформы не больше позиции ПРАВОГО барьера
+            (leftWall.transform.position.x < (platformPositionX - spriteWidth * 0.5 - 0.2))) // нужно что бы не выходить за границы
         {
             transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
         }
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        switch (other.gameObject.tag)
+        else if (Input.GetKey(KeyCode.D) &&
+            //   Смотрим что крайняя правая точна платформы не меньше позиции ЛЕВОГО барьера
+            (rightWall.transform.position.x > (platformPositionX + spriteWidth * 0.5 + 0.2)))
         {
-            case "This Left Wall":
-                {
-                    canMoveToLeft = false;
-                    Debug.Log("This Wall");
-                    break;
-                }
-            case "This Right Wall":
-                {
-                    canMoveToRight = false;
-                    Debug.Log("This Wall");
-                    break;
-                }
-        }
-
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (!other.CompareTag("Hit"))
-        {
-
-            canMoveToLeft = true;
-
-            canMoveToRight = true;
+            transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
         }
     }
 }

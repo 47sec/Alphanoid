@@ -9,32 +9,32 @@ using UnityEngine.UIElements;
 
 public class BlockManager : MonoBehaviour
 {
-    [Tooltip("ѕол€, на которых будут спавнитьс€ блоки")]
-    public List<BlocksField> blocksFields = new List<BlocksField>();
+    private List<BlocksField> blocksFields = new List<BlocksField>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach (var field in blocksFields)
+        foreach(Transform child in transform)
         {
-            field.Init();
+            blocksFields.Add(child.GetComponent<BlocksField>());
+            blocksFields[blocksFields.Count - 1].Init();
         }
     }
 
-    
-    // Update is called once per frame
-    void Update()
+    public void DestroyField(BlocksField field)
     {
+        blocksFields.Remove(field);
+        Destroy(field.gameObject);
     }
 
-    private void DestroyBlock(Block block)
+    public void DestroyBlock(Block block)
     {
         foreach(var field in blocksFields)
         {
-            if (field.DestroyBlock(block))
+            if (field.Contains(block))
             {
-                blocksFields.Remove(field);
-                Destroy(field.gameObject);
+                field.DestroyBlock(block);
+                break;
             }
         }
 

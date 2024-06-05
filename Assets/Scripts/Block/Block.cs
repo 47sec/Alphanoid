@@ -2,12 +2,20 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    public GameObject blockManager;
+    private BlockManager blockManager;
+
+    [HideInInspector]
+    public float relativeChance;
+
+    [Tooltip("Модификатор шанса спавна блока")]
+    public float chanceMod;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        relativeChance = chanceMod;
+        blockManager = GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>();
     }
 
     // Update is called once per frame
@@ -16,13 +24,16 @@ public class Block : MonoBehaviour
         
     }
 
+    public void setRelativeChance(float sum)
+    {
+        relativeChance = chanceMod / sum;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Hit"))
         {
-            //transform.position = new Vector2(10, 10);
-            //Destroy(transform.gameObject);
-            blockManager.SendMessage("DestroyBlock", this);
+            blockManager.DestroyBlock(this);
             collision.gameObject.SendMessage("Scored", 1u);
         }
     }

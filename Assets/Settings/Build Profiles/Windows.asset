@@ -21,9 +21,7 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/Level/Base.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level/You Died.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/Level/You Win.unity
+    m_path: Assets/Scenes/lvl1.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []

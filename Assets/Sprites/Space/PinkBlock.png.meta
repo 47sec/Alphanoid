@@ -197,7 +197,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PinkBlock_0: -733182737104962993
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

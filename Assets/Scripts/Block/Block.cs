@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -10,6 +11,14 @@ public class Block : MonoBehaviour
     [Tooltip("Модификатор шанса спавна блока")]
     public float chanceMod;
 
+    [Tooltip("Количество ударов по блоку для разрушения")]
+    public int blockHp;
+
+    [Tooltip("Количество очков за разрушение блока")]
+    public uint blockPoints;
+
+    [Tooltip("Ускорение мяча при столкновении с блоком (1 = 100%)")]
+    public float blockAcceleration;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,7 +30,7 @@ public class Block : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void setRelativeChance(float sum)
@@ -33,8 +42,22 @@ public class Block : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hit"))
         {
-            blockManager.DestroyBlock(this);
-            collision.gameObject.SendMessage("Scored", 1u);
+            var customScript = transform.GetComponent<CustomBlockScript>();
+
+            if (customScript != null)
+            {
+                customScript.CollisionUpdate(collision);
+            }
+
+            blockHp--;
+
+            collision.gameObject.GetComponent<Rigidbody2D>().velocity += collision.gameObject.GetComponent<Rigidbody2D>().velocity * blockAcceleration;
+
+            if (blockHp <= 0)
+            {
+                blockManager.DestroyBlock(this);
+                collision.gameObject.SendMessage("Scored", blockPoints);
+            }
         }
     }
 }

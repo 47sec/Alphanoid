@@ -54,8 +54,7 @@ public class Block : MonoBehaviour
 
             blockHp--;
 
-            // ”скор€ем м€ч в пределах максимальной скорости
-            ballRb.velocity = ballRb.velocity.normalized * Mathf.Clamp((ballRb.velocity + ballRb.velocity * blockAcceleration).magnitude, 0, ball.maxSpeed);
+            ball.ChangeSpeed(blockAcceleration);
 
             if (blockHp <= 0)
             {

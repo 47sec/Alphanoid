@@ -62,4 +62,10 @@ public class MoveBall : MonoBehaviour
     {
         platform.SendMessage("AddScore", points);
     }
+
+    public void ChangeSpeed(float percent)
+    {
+        // ”скор€ем м€ч в пределах максимальной скорости
+        rb.velocity = rb.velocity.normalized * Mathf.Clamp((rb.velocity + rb.velocity * percent).magnitude, 0, maxSpeed);
+    }
 }

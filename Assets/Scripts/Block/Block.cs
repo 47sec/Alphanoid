@@ -42,6 +42,9 @@ public class Block : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hit"))
         {
+            MoveBall ball = collision.gameObject.GetComponent<MoveBall>();
+            Rigidbody2D ballRb = ball.gameObject.GetComponent<Rigidbody2D>();
+
             var customScript = transform.GetComponent<CustomBlockScript>();
 
             if (customScript != null)
@@ -51,12 +54,13 @@ public class Block : MonoBehaviour
 
             blockHp--;
 
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity += collision.gameObject.GetComponent<Rigidbody2D>().velocity * blockAcceleration;
+            // ”скор€ем м€ч в пределах максимальной скорости
+            ballRb.velocity = ballRb.velocity.normalized * Mathf.Clamp((ballRb.velocity + ballRb.velocity * blockAcceleration).magnitude, 0, ball.maxSpeed);
 
             if (blockHp <= 0)
             {
                 blockManager.DestroyBlock(this);
-                collision.gameObject.SendMessage("Scored", blockPoints);
+                ball.gameObject.SendMessage("Scored", blockPoints);
             }
         }
     }

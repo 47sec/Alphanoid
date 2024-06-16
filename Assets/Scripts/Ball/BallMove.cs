@@ -4,8 +4,6 @@ using UnityEngine.UIElements;
 
 public class MoveBall : MonoBehaviour
 {
-    [SerializeField]
-
     Rigidbody2D rb;
     private bool ballIsActivated;
 
@@ -15,6 +13,11 @@ public class MoveBall : MonoBehaviour
     [Tooltip("—корость м€ча")]
     public float speed;
 
+    [Tooltip("ћаксимальна€ скорость м€ча")]
+    public float maxSpeed;
+
+    [Tooltip("—охран€ть скорость м€ча после смерти м€ча")]
+    public bool saveMomentum;
 
     private void Start()
     {
@@ -34,7 +37,7 @@ public class MoveBall : MonoBehaviour
     private void BallActivate()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(Random.Range(-5f, 5f), speed); ;
+        rb.velocity = Quaternion.AngleAxis(Random.Range(-45, 45), Vector3.forward) * (new Vector2(0, 1) * speed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,6 +47,8 @@ public class MoveBall : MonoBehaviour
             case "Lose":
                 platform.SendMessage("Damaged", 1);
                 ballIsActivated = false;
+                if (saveMomentum)
+                    speed = rb.velocity.magnitude;
                 rb.velocity = Vector2.zero;
                 platform.position = new Vector2(0, -4);
                 transform.position = new Vector2(0, -3);

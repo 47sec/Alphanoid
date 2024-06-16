@@ -2,6 +2,8 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UIElements.InputSystem;
 using static UnityEngine.Rendering.DebugUI;
 
 public class UIManager : MonoBehaviour

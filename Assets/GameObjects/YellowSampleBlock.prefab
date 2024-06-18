@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewards:
-  - {fileID: 6667816418322982064, guid: 6c8dddcd844da1141962138727280667, type: 3}
+  - {fileID: 5315024578677948394, guid: 6c8dddcd844da1141962138727280667, type: 3}
   relativeChance: 0.16666667
   chanceMod: 20
   blockHp: 1

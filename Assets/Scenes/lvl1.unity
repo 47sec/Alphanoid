@@ -2736,7 +2736,7 @@ PrefabInstance:
     - target: {fileID: 4430920662845754980, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: 'rewards.Array.data[0]'
       value: 
-      objectReference: {fileID: 6667816418322982064, guid: 6c8dddcd844da1141962138727280667, type: 3}
+      objectReference: {fileID: 5315024578677948394, guid: 6c8dddcd844da1141962138727280667, type: 3}
     - target: {fileID: 6742478066598837978, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

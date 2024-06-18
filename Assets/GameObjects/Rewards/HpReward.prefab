@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 8696904632903487909}
   - component: {fileID: 1960702781813277354}
   - component: {fileID: -4872988476175687662}
-  - component: {fileID: 6667816418322982064}
+  - component: {fileID: -762182488597442689}
+  - component: {fileID: 5315024578677948394}
   m_Layer: 0
-  m_Name: SampleReward
+  m_Name: HpReward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +164,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6667816418322982064
+--- !u!114 &-762182488597442689
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,9 +173,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 2561628035221021639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e929b964003aa4419bf28c403a17c2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d8af6732576c3649b115dc8ece90f0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healAmount: 2
+--- !u!114 &5315024578677948394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2561628035221021639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7604914a3a28c514c99cfde1a347389a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chanceMod: 1
-  speed: 3
-  relativeChance: 1
+  speed: 2
+  relativeChance: 0

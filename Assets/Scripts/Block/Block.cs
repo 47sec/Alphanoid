@@ -6,7 +6,8 @@ public class Block : MonoBehaviour
 {
     private BlockManager blockManager;
 
-    public List<CustomRewardScript> rewards = new List<CustomRewardScript>();
+    [Tooltip("—писок наград дл€ рандомного выпадени€")]
+    public List<Reward> rewards = new List<Reward>();
 
     [HideInInspector]
     public float relativeChance;
@@ -23,18 +24,11 @@ public class Block : MonoBehaviour
     [Tooltip("”скорение м€ча при столкновении с блоком (1 = 100%)")]
     public float blockAcceleration;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         fixChances();
         relativeChance = chanceMod;
         blockManager = GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void setRelativeChance(float sum)
@@ -73,6 +67,8 @@ public class Block : MonoBehaviour
     private void dropReward()
     {
         float rnd = Random.value;
+
+        // —павнит рандомную награду на месте блока
         foreach (var reward in rewards)
         {
             if (rnd < reward.relativeChance)
@@ -86,6 +82,7 @@ public class Block : MonoBehaviour
         Instantiate(rewards[0].gameObject, GameObject.FindGameObjectWithTag("RandomRewardManager").transform).transform.position = transform.position;
     }
 
+    // ƒл€ корректоного рандома
     private void fixChances()
     {
         float sum = 0;

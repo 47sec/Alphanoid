@@ -6,7 +6,7 @@ using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 public class RandomRewardManager : MonoBehaviour
 {
     [Tooltip("Список наград для рандомного выпадения")]
-    public List<CustomRewardScript> rewards = new List<CustomRewardScript>();
+    public List<Reward> rewards = new List<Reward>();
 
     [Tooltip("Как часто будет происходить попытка спавна награды")]
     public float dropRate;
@@ -24,6 +24,7 @@ public class RandomRewardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Простой таймер с проверкой на рандом
         if (Time.time > nextDropTime)
         {
             nextDropTime += dropRate;
@@ -40,8 +41,10 @@ public class RandomRewardManager : MonoBehaviour
     {
         Vector2 bounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
+        // Рандомная точка сверху экрана
         Vector2 randomPos = Vector2.Lerp(bounds, new Vector2(-bounds.x, bounds.y), Random.value);
 
+        // Рандомная награда
         float rnd = Random.value;
         foreach (var reward in rewards)
         {
@@ -56,6 +59,7 @@ public class RandomRewardManager : MonoBehaviour
         Instantiate(rewards[0].gameObject, transform).transform.position = randomPos;
     }
 
+    // Для корректного рандома
     private void fixChances()
     {
         float sum = 0;
@@ -71,4 +75,5 @@ public class RandomRewardManager : MonoBehaviour
 
         rewards.Sort((x, y) => y.relativeChance.CompareTo(x.relativeChance));
     }
+
 }

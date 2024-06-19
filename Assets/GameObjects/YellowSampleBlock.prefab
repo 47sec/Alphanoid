@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   relativeChance: 0.16666667
-  chanceMod: 20
+  chanceMod: 1
   blockHp: 1
   blockPoints: 5
   blockAcceleration: 0.02

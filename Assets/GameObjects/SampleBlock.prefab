@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7309437497266814902}
   - component: {fileID: 5587363886548753538}
   - component: {fileID: 8050015025288809420}
-  - component: {fileID: 8682553737839024184}
   m_Layer: 0
   m_Name: SampleBlock
   m_TagString: Scored
@@ -148,21 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e010941306a990438ad3022b83857df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewards: []
   relativeChance: 0.5
   chanceMod: 10
   blockHp: 1
   blockPoints: 1
   blockAcceleration: 0
---- !u!114 &8682553737839024184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9007888294617814651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652437df4b1aa004eb0150315763cac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

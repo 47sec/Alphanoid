@@ -28,6 +28,9 @@ public class Reward : MonoBehaviour
             script.Use(collision);
             Destroy(transform.gameObject);
         }
+
+        if (collision.transform.CompareTag("Lose"))
+            Destroy(transform.gameObject);
     }
     public void setRelativeChance(float sum)
     {

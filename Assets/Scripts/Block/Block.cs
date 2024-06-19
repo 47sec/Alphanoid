@@ -6,9 +6,6 @@ public class Block : MonoBehaviour
 {
     private BlockManager blockManager;
 
-    [Tooltip("Список наград для рандомного выпадения")]
-    public List<Reward> rewards = new List<Reward>();
-
     [HideInInspector]
     public float relativeChance;
 
@@ -26,7 +23,6 @@ public class Block : MonoBehaviour
 
     void Start()
     {
-        fixChances();
         relativeChance = chanceMod;
         blockManager = GameObject.FindWithTag("BlockManager").GetComponent<BlockManager>();
     }
@@ -56,46 +52,9 @@ public class Block : MonoBehaviour
 
             if (blockHp <= 0)
             {
-                if (rewards.Count > 0)
-                    dropReward();
                 blockManager.DestroyBlock(this);
                 ball.gameObject.SendMessage("Scored", blockPoints);
             }
         }
-    }
-
-    private void dropReward()
-    {
-        float rnd = Random.value;
-
-        // Спавнит рандомную награду на месте блока
-        foreach (var reward in rewards)
-        {
-            if (rnd < reward.relativeChance)
-            {
-                Instantiate(reward.gameObject, GameObject.FindGameObjectWithTag("RandomRewardManager").transform).transform.position = transform.position;
-                return;
-            }
-            rnd -= reward.relativeChance;
-        }
-
-        Instantiate(rewards[0].gameObject, GameObject.FindGameObjectWithTag("RandomRewardManager").transform).transform.position = transform.position;
-    }
-
-    // Для корректоного рандома
-    private void fixChances()
-    {
-        float sum = 0;
-        foreach (var reward in rewards)
-        {
-            sum += reward.chanceMod;
-        }
-
-        foreach (var reward in rewards)
-        {
-            reward.setRelativeChance(sum);
-        }
-
-        rewards.Sort((x, y) => y.relativeChance.CompareTo(x.relativeChance));
     }
 }

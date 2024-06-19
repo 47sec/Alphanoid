@@ -11,7 +11,7 @@ TagManager:
   - This Right Wall
   - BlockManager
   - Scored
-  - RandomRewardManager
+  - Rewards
   layers:
   - Default
   - TransparentFX

@@ -20,8 +20,6 @@ public class Reward : MonoBehaviour
         transform.GetComponent<Rigidbody2D>().velocity = Vector2.down * speed;
     }
 
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("Player"))

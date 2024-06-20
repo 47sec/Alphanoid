@@ -1173,7 +1173,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2412709871564737021, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: chance
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2412709871564737021, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: dropRate
@@ -1181,12 +1181,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2412709871564737021, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: rewards.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2412709871564737021, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: 'rewards.Array.data[0]'
       value: 
       objectReference: {fileID: 5315024578677948394, guid: 6c8dddcd844da1141962138727280667, type: 3}
+    - target: {fileID: 2412709871564737021, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
+      propertyPath: 'rewards.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5315024578677948394, guid: f35209be54ae5464e97b0c8c0d9ecdca, type: 3}
     - target: {fileID: 3184049006444134305, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: m_Name
       value: RandomRewardManager

@@ -24,20 +24,29 @@ public class MoveBall : MonoBehaviour
         ballIsActivated = false;
     }
 
+    public bool getActive()
+    {
+        return ballIsActivated;
+    }
+
     void Update()
     {
         if (!ballIsActivated && Input.GetKeyDown(KeyCode.Space))
         {
             BallActivate();
-            ballIsActivated = true;
         }
         if (!ballIsActivated) { transform.position = new Vector2(platform.position.x, transform.position.y); }
     }
-
-    private void BallActivate()
+    public void BallActivate()
     {
+        ballIsActivated = true;
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Quaternion.AngleAxis(Random.Range(-45, 45), Vector3.forward) * (new Vector2(0, 1) * speed);
+    }
+
+    public void disable()
+    {
+        ballIsActivated = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

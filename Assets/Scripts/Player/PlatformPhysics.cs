@@ -12,6 +12,13 @@ public class PlatformPhysics : MonoBehaviour
     [Tooltip("Меньше число, больше зона центра")]
     public float centerSize = 2.2f;
 
+    private bool sticky = false;
+
+    public void setSticky(bool sticky)
+    {
+        this.sticky = sticky;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         switch (other.gameObject.tag)
@@ -19,6 +26,13 @@ public class PlatformPhysics : MonoBehaviour
             case "Hit":
                 {
                     Rigidbody2D ball_rb = other.attachedRigidbody;
+
+                    if (sticky)
+                    {
+                        other.GetComponent<MoveBall>().disable();
+                        ball_rb.velocity = Vector3.zero;
+                        break;
+                    }
 
                     float distance = ball_rb.transform.position.x - transform.position.x;
 
@@ -35,7 +49,7 @@ public class PlatformPhysics : MonoBehaviour
                         * (ball_rb.velocity / ball_rb.velocity.normalized);
                     break;
                 }
-            
+
         }
     }
 

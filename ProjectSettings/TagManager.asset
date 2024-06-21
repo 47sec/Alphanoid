@@ -9,7 +9,9 @@ TagManager:
   - This Wall
   - This Left Wall
   - This Right Wall
+  - BlockManager
   - Scored
+  - Rewards
   layers:
   - Default
   - TransparentFX

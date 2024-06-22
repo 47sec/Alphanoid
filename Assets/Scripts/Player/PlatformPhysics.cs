@@ -35,6 +35,7 @@ public class PlatformPhysics : MonoBehaviour
         float bounceAngle = Mathf.Lerp(45, -45, posDifference.normalized.x);
 
         ball_rb.velocity = Quaternion.AngleAxis(bounceAngle, Vector3.forward) * (new Vector2(0, 1) * ball_rb.GetComponent<BallScript>().getSpeed());
+        ball_rb.GetComponent<BallScript>().setDirection(ball_rb.velocity.normalized);
 
 
         //float distance = ball_rb.transform.position.x - transform.position.x;

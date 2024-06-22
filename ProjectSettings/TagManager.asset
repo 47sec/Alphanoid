@@ -4,14 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Lose
   - Hit
-  - This Wall
-  - This Left Wall
-  - This Right Wall
   - BlockManager
   - Rewards
   - Block
+  - Edges
+  - Lose
   layers:
   - Default
   - TransparentFX

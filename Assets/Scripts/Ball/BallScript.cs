@@ -14,6 +14,8 @@ public class BallScript : MonoBehaviour
     [Tooltip("—охран€ть скорость м€ча после смерти м€ча")]
     private bool saveMomentum;
 
+    private Vector2 direction;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         switch (collision.gameObject.tag)
@@ -25,23 +27,36 @@ public class BallScript : MonoBehaviour
             case "Hit":
                 break;
 
-            case "Block":
-                collision.transform.GetComponent<Block>().hit(1, gameObject);
-                break;
-
             case "Lose":
                 lose();
                 break;
 
+            case "Block":
+                collision.transform.GetComponent<Block>().hit(1, gameObject);
+                reflect(collision);
+                break;
+
             default:
-                {
-                    Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                reflect(collision);
+                break;
+        }
+    }
 
-                    foreach (var contact in collision.contacts)
-                        rb.velocity = Vector2.Reflect(rb.velocity, contact.normal);
+    public void setDirection(Vector2 direction)
+    {
+        this.direction = direction;
+    }
 
-                    break;
-                }
+    private void reflect(Collision2D collision)
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        foreach (var contact in collision.contacts)
+        {
+            Vector2 refl = Vector2.Reflect(direction, contact.normal) * speed;
+            setDirection(refl.normalized);
+            Debug.Log(refl);
+            rb.velocity = refl;
         }
     }
 

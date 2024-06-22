@@ -62,5 +62,6 @@ public class PlatformInput : MonoBehaviour
     public void activateBall(Rigidbody2D ball)
     {
         ball.velocity = Quaternion.AngleAxis(Random.Range(-45, 45), Vector3.forward) * (new Vector2(0, 1) * ball.GetComponent<BallScript>().getSpeed());
+        ball.GetComponent<BallScript>().setDirection(ball.velocity.normalized);
     }
 }

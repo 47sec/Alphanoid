@@ -41,6 +41,7 @@ public class Block : MonoBehaviour
             customScript.CollisionUpdate(hitBy);
         }
 
+        hitBy.SendMessage("ChangeSpeed", blockAcceleration);
         blockHp -= damage;
 
         if (blockHp <= 0)

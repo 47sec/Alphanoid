@@ -6,6 +6,8 @@ public class BallScript : MonoBehaviour
     [Tooltip("—корость м€ча")]
     private float speed;
 
+    private float dynamicSpeed;
+
     [SerializeField]
     [Tooltip("ћаксимальна€ скорость м€ча")]
     private float maxSpeed;
@@ -41,6 +43,15 @@ public class BallScript : MonoBehaviour
                 break;
         }
     }
+    private void Start()
+    {
+        dynamicSpeed = speed;
+    }
+
+    public void setDynamicSpeed()
+    {
+        dynamicSpeed = speed;
+    }
 
     public void setDirection(Vector2 direction)
     {
@@ -53,7 +64,7 @@ public class BallScript : MonoBehaviour
 
         foreach (var contact in collision.contacts)
         {
-            Vector2 refl = Vector2.Reflect(direction, contact.normal) * speed;
+            Vector2 refl = Vector2.Reflect(direction, contact.normal) * dynamicSpeed;
             setDirection(refl.normalized);
             rb.velocity = refl;
         }
@@ -71,7 +82,7 @@ public class BallScript : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (saveMomentum)
-            speed = rb.velocity.magnitude;
+            speed = dynamicSpeed;
 
         rb.velocity = Vector3.zero;
         transform.position = player.transform.position + new Vector3(0, player.GetComponent<BoxCollider2D>().size.y / 2);
@@ -82,7 +93,7 @@ public class BallScript : MonoBehaviour
 
     public float getSpeed()
     {
-        return speed;
+        return dynamicSpeed;
     }
 
     private void Scored(uint points)
@@ -92,9 +103,7 @@ public class BallScript : MonoBehaviour
 
     public void ChangeSpeed(float percent)
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        // ”скор€ем м€ч в пределах максимальной скорости
-        rb.velocity = rb.velocity.normalized * Mathf.Clamp((rb.velocity + rb.velocity * percent).magnitude, 0, maxSpeed);
+        dynamicSpeed = Mathf.Clamp(dynamicSpeed + dynamicSpeed * percent, 0, maxSpeed);
     }
 
 }

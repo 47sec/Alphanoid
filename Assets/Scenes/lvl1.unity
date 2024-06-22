@@ -423,8 +423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e31028374b7a6224da473fe1ab3e48f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleMod: 8
-  centerSize: 1.7
 --- !u!114 &273101929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1363,8 +1361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  maxSpeed: 20
-  saveMomentum: 0
+  maxSpeed: 12
+  saveMomentum: 1
 --- !u!1 &1255928785
 GameObject:
   m_ObjectHideFlags: 0

@@ -79,6 +79,14 @@ public class BallScript : MonoBehaviour
             setDirection(refl.normalized);
             rb.velocity = refl;
         }
+        float angle = Vector2.Angle(rb.velocity, Vector2.right);
+        float correctedAngle = Mathf.Clamp(angle, 45f, 135f);
+
+        // Либо -1, либо 1
+        float dir = (rb.velocity * Vector2.up).normalized.y;
+
+        // Поворачиваем мяч, если угол относительно X больше 135 или меньше 45
+        rb.velocity = Quaternion.AngleAxis(dir * (correctedAngle - angle), Vector3.forward) * rb.velocity;
     }
 
     private void lose()

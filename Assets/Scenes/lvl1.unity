@@ -1215,7 +1215,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: fead1779a0967b848b5527e02d3c92fd, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   maxSpeed: 12
-  saveMomentum: 1
+  saveMomentum: 0
 --- !u!1 &1255928785
 GameObject:
   m_ObjectHideFlags: 0

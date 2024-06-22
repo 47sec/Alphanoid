@@ -55,7 +55,6 @@ public class BallScript : MonoBehaviour
         {
             Vector2 refl = Vector2.Reflect(direction, contact.normal) * speed;
             setDirection(refl.normalized);
-            Debug.Log(refl);
             rb.velocity = refl;
         }
     }

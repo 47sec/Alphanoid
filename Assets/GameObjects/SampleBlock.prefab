@@ -170,4 +170,4 @@ MonoBehaviour:
   randomRewards: 0
   dropRate: 0
   chance: 0
-  dropOnDestroy: 1
+  dropOnDestroy: 0

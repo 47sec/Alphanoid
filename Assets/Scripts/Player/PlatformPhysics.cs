@@ -10,7 +10,7 @@ public class PlatformPhysics : MonoBehaviour
     public float angleMod = 8f;
 
     [Tooltip("Меньше число, больше зона центра")]
-    public float centerSize = 2.2f;
+    public float centerSize = 1.7f;
 
     private bool sticky = false;
 
@@ -18,39 +18,31 @@ public class PlatformPhysics : MonoBehaviour
     {
         this.sticky = sticky;
     }
-
-    void OnTriggerEnter2D(Collider2D other)
+    public void setReflection(Transform other)
     {
-        switch (other.gameObject.tag)
+        other.position = new Vector2(other.position.x, transform.position.y + (transform.GetComponent<BoxCollider2D>().size.y / 2));
+        Rigidbody2D ball_rb = other.GetComponent<Rigidbody2D>();
+
+        if (sticky)
         {
-            case "Hit":
-                {
-                    Rigidbody2D ball_rb = other.attachedRigidbody;
-
-                    if (sticky)
-                    {
-                        other.GetComponent<MoveBall>().disable();
-                        ball_rb.velocity = Vector3.zero;
-                        break;
-                    }
-
-                    float distance = ball_rb.transform.position.x - transform.position.x;
-
-                    float direction_x = new Vector2(distance, 0).normalized.x; // Сторона, в которую будет отскок
-
-                    float center_clamp = Mathf.Floor(Mathf.Clamp(Mathf.Abs(distance) * centerSize, 0, 1)) * Mathf.Abs(distance) + 0.05f;
-
-                    ball_rb.velocity =
-                        (
-                            ball_rb.velocity *
-                            (new Vector2(0f, -1f)) +
-                            (new Vector2(center_clamp * direction_x * angleMod, 0f))
-                        ).normalized
-                        * (ball_rb.velocity / ball_rb.velocity.normalized);
-                    break;
-                }
-
+            ball_rb.velocity = Vector2.zero;
+            GetComponent<PlatformInput>().attachBall(ball_rb);
+            return;
         }
+
+        float distance = ball_rb.transform.position.x - transform.position.x;
+
+        float direction_x = new Vector2(distance, 0).normalized.x; // Сторона, в которую будет отскок
+
+        float center_clamp = Mathf.Floor(Mathf.Clamp(Mathf.Abs(distance) * centerSize, 0, 1)) * Mathf.Abs(distance) + 0.05f;
+
+        ball_rb.velocity =
+            (
+                ball_rb.velocity *
+                (new Vector2(0f, -1f)) +
+                (new Vector2(center_clamp * direction_x * angleMod, 0f))
+            ).normalized
+            * (ball_rb.velocity / ball_rb.velocity.normalized);
     }
 
 }

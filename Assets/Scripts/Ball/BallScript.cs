@@ -17,6 +17,7 @@ public class BallScript : MonoBehaviour
     private bool saveMomentum;
 
     private Vector2 direction;
+    private Rigidbody2D rb;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -24,9 +25,6 @@ public class BallScript : MonoBehaviour
         {
             case "Player":
                 collision.transform.GetComponent<PlatformPhysics>().setReflection(transform);
-                break;
-
-            case "Hit":
                 break;
 
             case "Lose":
@@ -43,14 +41,29 @@ public class BallScript : MonoBehaviour
                 break;
         }
     }
-    private void Start()
+
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        dynamicSpeed = speed;
+        if (collision.gameObject.CompareTag("Edges"))
+        {
+            foreach (var point in collision.contacts)
+            {
+                transform.position += (Vector3)(new Vector2(Mathf.Abs(transform.position.x - point.point.x),
+                        Mathf.Abs(transform.position.y - point.point.y)) * point.normal);
+
+            }
+        }
     }
 
-    public void setDynamicSpeed()
+    private void Start()
+    {
+        ballInit();
+    }
+
+    public void ballInit()
     {
         dynamicSpeed = speed;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void setDirection(Vector2 direction)
@@ -60,8 +73,6 @@ public class BallScript : MonoBehaviour
 
     private void reflect(Collision2D collision)
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
         foreach (var contact in collision.contacts)
         {
             Vector2 refl = Vector2.Reflect(direction, contact.normal) * dynamicSpeed;
@@ -78,7 +89,6 @@ public class BallScript : MonoBehaviour
             return;
         }
 
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (saveMomentum)

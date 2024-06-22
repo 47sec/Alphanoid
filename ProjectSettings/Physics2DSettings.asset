@@ -18,8 +18,8 @@ Physics2DSettings:
   m_TimeToSleep: 0.5
   m_LinearSleepTolerance: 0.01
   m_AngularSleepTolerance: 2
-  m_DefaultContactOffset: 0.01
-  m_ContactThreshold: 0.01
+  m_DefaultContactOffset: 0.05
+  m_ContactThreshold: 0.05
   m_JobOptions:
     serializedVersion: 2
     useMultithreading: 0
@@ -39,12 +39,12 @@ Physics2DSettings:
     m_IslandSolverJointCostScale: 10
     m_IslandSolverBodiesPerJob: 50
     m_IslandSolverContactsPerJob: 50
-  m_SimulationMode: 0
+  m_SimulationMode: 1
   m_SimulationLayers:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxSubStepCount: 4
-  m_MinSubStepFPS: 30
+  m_MinSubStepFPS: 60
   m_UseSubStepping: 0
   m_UseSubStepContacts: 0
   m_QueriesHitTriggers: 1

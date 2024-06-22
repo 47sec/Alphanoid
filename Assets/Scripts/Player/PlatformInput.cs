@@ -25,7 +25,7 @@ public class PlatformInput : MonoBehaviour
 
         foreach(var ball in attachedBalls)
         {
-            ball.velocity = input * speed * Vector2.right;
+            ball.position = rb.position * Vector2.right + ball.transform.position * Vector2.up;
         }
     }
 

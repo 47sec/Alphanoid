@@ -2029,6 +2029,7 @@ GameObject:
   - component: {fileID: 1651263439}
   - component: {fileID: 1651263438}
   - component: {fileID: 1651263437}
+  - component: {fileID: 1651263440}
   m_Layer: 0
   m_Name: Edges
   m_TagString: Edges
@@ -2106,6 +2107,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1651263440
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651263436}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!224 &1716295349 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7080115727021688386, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}

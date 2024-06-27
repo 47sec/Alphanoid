@@ -13,8 +13,7 @@ public class DroppingRewards : MonoBehaviour
     [Tooltip(" ак часто будет происходить попытка спавна награды")]
     public float dropRate;
 
-    [ConditionalHide(nameof(randomRewards), hideInInspector: true)]
-    [Tooltip("Ўанс по€влени€ награды при попытке спавна (0-1)")]
+    [Tooltip("Ўанс по€влени€ награды (0-1)")]
     public float chance;
 
     [Tooltip("—павн награды при разрушении")]
@@ -35,7 +34,7 @@ public class DroppingRewards : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (dropOnDestroy)
+        if (dropOnDestroy && Random.value <= chance)
             dropReward();
     }
 

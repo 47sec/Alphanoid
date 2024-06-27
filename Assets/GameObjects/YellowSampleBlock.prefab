@@ -168,5 +168,5 @@ MonoBehaviour:
   rewards: []
   randomRewards: 0
   dropRate: 0
-  chance: 0
-  dropOnDestroy: 0
+  chance: 0.5
+  dropOnDestroy: 1

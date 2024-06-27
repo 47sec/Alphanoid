@@ -4,21 +4,20 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Lose
   - Hit
-  - This Wall
-  - This Left Wall
-  - This Right Wall
   - BlockManager
-  - Scored
+  - Rewards
+  - Block
+  - Edges
+  - Lose
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ball
   - Water
   - UI
-  - 
+  - Bottom
   - 
   - 
   - 

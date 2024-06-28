@@ -165,8 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5141692c252ae2f40ba5c4f99392c5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewards: []
+  rewards:
+  - {fileID: 5315024578677948394, guid: 500661b3ee0088946bd58f521602dbce, type: 3}
   randomRewards: 0
   dropRate: 0
-  chance: 0.5
+  chance: 1
   dropOnDestroy: 1

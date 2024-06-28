@@ -27,8 +27,6 @@ public class CustomEffectScript : ScriptableObject
         sprite.color -= (Color.black * shadeDir) * 0.025f;
         if (sprite.color.a >= 0.99f || sprite.color.a <= 0.5f)
             shadeDir *= -1f;
-
-        Debug.Log(sprite.color);
     }
 
     // Принимает вторым параметром статический метод, который будет выполнен после окончания мигания

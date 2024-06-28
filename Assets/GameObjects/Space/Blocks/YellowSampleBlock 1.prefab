@@ -120,11 +120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5141692c252ae2f40ba5c4f99392c5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewards: []
+  rewards:
+  - {fileID: 5315024578677948394, guid: 4d9d20d5dd1958d49bdb38a1abd40ee3, type: 3}
   randomRewards: 0
   dropRate: 0
-  chance: 0
-  dropOnDestroy: 0
+  chance: 1
+  dropOnDestroy: 1
 --- !u!68 &2576519514077114007
 EdgeCollider2D:
   m_ObjectHideFlags: 0

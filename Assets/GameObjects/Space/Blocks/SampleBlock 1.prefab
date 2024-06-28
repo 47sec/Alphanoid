@@ -124,7 +124,7 @@ MonoBehaviour:
   - {fileID: 5315024578677948394, guid: fc6c383a4033b3d4094ae3400949bd45, type: 3}
   randomRewards: 0
   dropRate: 0
-  chance: 0
+  chance: 1
   dropOnDestroy: 1
 --- !u!68 &6973793026614954079
 EdgeCollider2D:

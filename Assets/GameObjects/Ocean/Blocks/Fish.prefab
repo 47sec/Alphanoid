@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e010941306a990438ad3022b83857df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relativeChance: 0.5
+  relativeChance: 0.6666667
   chanceMod: 10
   blockHp: 1
   blockPoints: 1
@@ -169,5 +169,5 @@ MonoBehaviour:
   - {fileID: 5315024578677948394, guid: 9870b32d07ac655449c91fcd612744a7, type: 3}
   randomRewards: 0
   dropRate: 0
-  chance: 0.5
+  chance: 1
   dropOnDestroy: 1

@@ -1,5 +1,7 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EffectHandler : MonoBehaviour
@@ -8,20 +10,28 @@ public class EffectHandler : MonoBehaviour
 
     private List<CustomEffectScript> effects = new List<CustomEffectScript>();
 
-    private List<float> effectTimers = new List<float>();
+    // Лямда для длительного эффекта должна возвращать true, если он закончился
+    // Сам этот лист в себе содержит действия, которые будут выполнятся при каждом вызове Update()
+    // Пример использования в WideEffect.cs
+    private List<Func<bool>> lastingEffects = new List<Func<bool>>();
 
     private void Update()
     {
+        for (int i = 0; i < lastingEffects.Count; i++)
+        {
+            if (lastingEffects[i]())
+                lastingEffects.RemoveAt(i);
+        }
+
         for (int i = 0; i < effects.Count; i++)
         {
             // Отсчитываем время у всех таймеров
-            effectTimers[i] -= Time.deltaTime;
-            if (effectTimers[i] <= 0)
+            effects[i].timer -= Time.deltaTime;
+            if (effects[i].timer <= 0)
             {
                 effects[i].deactivate(transform);
 
                 effects.RemoveAt(i);
-                effectTimers.RemoveAt(i);
             }
         }
     }
@@ -33,12 +43,17 @@ public class EffectHandler : MonoBehaviour
 
         if (index != -1)
         {
-            effectTimers[index] = time;
+            effects[index].timer = time;
             return;
         }
 
+        script.timer = time;
         effects.Add(script);
-        effectTimers.Add(time);
         script.activate(transform);
+    }
+
+    public void addLastingEffect(Func<bool> effect)
+    {
+        lastingEffects.Add(effect);
     }
 }

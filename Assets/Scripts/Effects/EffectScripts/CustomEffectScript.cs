@@ -4,6 +4,9 @@ public class CustomEffectScript : ScriptableObject
 {
     // Id класса-наследника должен быть уникальным, я хз как сделать это автоматически
     private const uint effectId = 0;
+
+    public float timer = 0;
+
     public virtual void activate(Transform transform) { Debug.Log("You stupid"); }
     public virtual void deactivate(Transform transform) { Debug.Log("You stupid"); }
 

@@ -24,13 +24,8 @@ public class StickyPlatformEffect : CustomEffectScript
     private static void reset(Transform transform)
     {
         transform.GetComponent<PlatformPhysics>().setSticky(false);
+        transform.GetComponent<PlatformInput>().sendAllBalls();
 
-        foreach (var ball in GameObject.FindGameObjectsWithTag("Hit"))
-        {
-            var ballObj = ball.GetComponent<MoveBall>();
-            if (!ballObj.getActive())
-                ballObj.BallActivate();
-        }
     }
 
 }

@@ -32,29 +32,22 @@ public class Block : MonoBehaviour
         relativeChance = chanceMod / sum;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Hit"))
+    public void hit(int damage, GameObject hitBy)
+    { 
+        var customScript = transform.GetComponent<CustomBlockScript>();
+
+        if (customScript != null)
         {
-            MoveBall ball = collision.gameObject.GetComponent<MoveBall>();
-            Rigidbody2D ballRb = ball.gameObject.GetComponent<Rigidbody2D>();
+            customScript.CollisionUpdate(hitBy);
+        }
 
-            var customScript = transform.GetComponent<CustomBlockScript>();
+        hitBy.SendMessage("ChangeSpeed", blockAcceleration);
+        blockHp -= damage;
 
-            if (customScript != null)
-            {
-                customScript.CollisionUpdate(collision);
-            }
-
-            blockHp--;
-
-            ball.ChangeSpeed(blockAcceleration);
-
-            if (blockHp <= 0)
-            {
-                blockManager.DestroyBlock(this);
-                ball.gameObject.SendMessage("Scored", blockPoints);
-            }
+        if (blockHp <= 0)
+        {
+            blockManager.DestroyBlock(this);
+            hitBy.SendMessage("Scored", blockPoints);
         }
     }
 }

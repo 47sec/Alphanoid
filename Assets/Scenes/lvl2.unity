@@ -288,9 +288,9 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.099999994, y: 0.12, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.7, y: 1.88}
+    oldSize: {x: 10.08, y: 3.63}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -342,7 +342,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2695397407002535339, guid: 0e3508c8afa67f93bbe38bba32ff41fe, type: 3}
+  m_Sprite: {fileID: 506016777213548312, guid: 9f8b1f70f49a5384fa50aca13003e855, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -847,11 +847,11 @@ PrefabInstance:
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: 'sampleBlocks.Array.data[0]'
       value: 
-      objectReference: {fileID: 5658257033525029691, guid: 02121cd6a7c228449961ffffec12087f, type: 3}
+      objectReference: {fileID: 8050015025288809420, guid: ed179dd5a65d228478b7c4f473e26f12, type: 3}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: 'sampleBlocks.Array.data[1]'
       value: 
-      objectReference: {fileID: 7410874538443216489, guid: 2229eb9957908804dbee9a47bbd0139c, type: 3}
+      objectReference: {fileID: 8050015025288809420, guid: 7f1b2d9b7e8112543a84f1ed52701e9c, type: 3}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: mat.cells.Array.data[0].row.Array.size
       value: 9
@@ -1299,11 +1299,11 @@ PrefabInstance:
     - target: {fileID: 2412709871564737021, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: 'rewards.Array.data[0]'
       value: 
-      objectReference: {fileID: 5315024578677948394, guid: 6c8dddcd844da1141962138727280667, type: 3}
+      objectReference: {fileID: 5315024578677948394, guid: 063cb53b3d737874ba901dbcba69defd, type: 3}
     - target: {fileID: 2412709871564737021, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: 'rewards.Array.data[1]'
       value: 
-      objectReference: {fileID: 5315024578677948394, guid: f35209be54ae5464e97b0c8c0d9ecdca, type: 3}
+      objectReference: {fileID: 5315024578677948394, guid: 71481ce982fc62440b6fc2f150fae786, type: 3}
     - target: {fileID: 3184049006444134305, guid: 87e16b14171e5ce41ad7f54443001ebf, type: 3}
       propertyPath: m_Name
       value: RandomRewardManager
@@ -1426,7 +1426,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2683982095689005895, guid: a3f4b2556afe3eb418a0fd56438e23a5, type: 3}
+  m_Sprite: {fileID: -9016594379831563037, guid: abb3aae46df915743ab068ad55730963, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1896,11 +1896,11 @@ PrefabInstance:
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: 'sampleBlocks.Array.data[0]'
       value: 
-      objectReference: {fileID: 5658257033525029691, guid: 02121cd6a7c228449961ffffec12087f, type: 3}
+      objectReference: {fileID: 8050015025288809420, guid: ed179dd5a65d228478b7c4f473e26f12, type: 3}
     - target: {fileID: 5545486574043631075, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: 'sampleBlocks.Array.data[1]'
       value: 
-      objectReference: {fileID: 7410874538443216489, guid: 2229eb9957908804dbee9a47bbd0139c, type: 3}
+      objectReference: {fileID: 8050015025288809420, guid: 7f1b2d9b7e8112543a84f1ed52701e9c, type: 3}
     - target: {fileID: 7080115727021688386, guid: c50211a2cfd1eda4d9a3f3898f7fd6be, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2478,7 +2478,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -673095708773354265, guid: 9694027bb63a7bd4da9852f24c7a908c, type: 3}
+  m_Sprite: {fileID: 6920515119336940421, guid: a774f2468e6b46e4b9f10704ad703e94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

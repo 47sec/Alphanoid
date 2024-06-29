@@ -26,12 +26,6 @@ public class WideEffect : CustomEffectScript
 
     public override void deactivate(Transform transform)
     {
-        // Перед выключением объект начнёт моргать
-        shadeAndDeactivate(transform, reset);
-    }
-
-    private static void reset(Transform transform)
-    {
         EffectHandler effectHandler = transform.GetComponent<EffectHandler>();
 
         Vector3 halfScaleX = transform.localScale * new Vector2(0.5f, 1);

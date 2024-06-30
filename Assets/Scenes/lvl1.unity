@@ -435,6 +435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c38ce6b02aaf64f86508cb188bb17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadeBeforeEnd: 0
+  shadeTimer: 2
 --- !u!114 &273101930
 MonoBehaviour:
   m_ObjectHideFlags: 0

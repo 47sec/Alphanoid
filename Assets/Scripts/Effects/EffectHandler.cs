@@ -15,7 +15,13 @@ public class EffectHandler : MonoBehaviour
 
     private float shadeDir = 1f;
 
-    [SerializeField][Tooltip("Время до окончания эффекта для активации моргания (в секундах)")]
+    [SerializeField]
+    [Tooltip("Морагние объекта перед окончанием эффекта")]
+    private bool shadeBeforeEnd = false;
+
+    [SerializeField]
+    [Tooltip("Время до окончания эффекта для активации моргания (в секундах)")]
+    [ConditionalHide(nameof(shadeBeforeEnd), hideInInspector: true)]
     private float shadeTimer = 2f;
 
     private SpriteRenderer sprite;
@@ -35,11 +41,13 @@ public class EffectHandler : MonoBehaviour
                 i--;
             }
         }
-
-        if (effects.FindIndex((x) => { return x.timer <= shadeTimer; }) != -1)
-            setShade();
-        else
-            resetShade();
+        if (shadeBeforeEnd)
+        {
+            if (effects.FindIndex((x) => { return x.timer <= shadeTimer; }) != -1)
+                setShade();
+            else
+                resetShade();
+        }
 
         for (int i = 0; i < effects.Count; i++)
         {

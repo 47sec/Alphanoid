@@ -1,4 +1,3 @@
-using Mono.Cecil.Cil;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,8 +10,6 @@ public class PlatformMovement : MonoBehaviour
     private bool canMoveToLeft;
     private bool canMoveToRight;
 
-    private float sendingTimer = 0.1f;
-
     void Start()
     {
         canMoveToLeft = true;
@@ -20,9 +17,6 @@ public class PlatformMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        // Без этого бреда засчитывает миллион нажатий пробела вместо одного
-        sendingTimer = Mathf.Clamp(sendingTimer - Time.deltaTime, 0, 0.1f);
-
         if (Input.GetKey(KeyCode.D) && canMoveToRight)
         {
             transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
@@ -31,25 +25,6 @@ public class PlatformMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && canMoveToLeft)
         {
             transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
-        }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            var balls = GameObject.FindGameObjectsWithTag("Hit");  // Сорри
-
-
-            foreach (var ball in balls)
-            {
-                // Запускает только 1 мяч
-
-                MoveBall ballObj = ball.GetComponent<MoveBall>();
-                if (!ballObj.getActive() && sendingTimer <= 0)
-                {
-                    sendingTimer = 0.1f;
-                    ballObj.BallActivate();
-                    break;
-                }
-            }
         }
     }
 

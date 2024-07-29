@@ -48,15 +48,6 @@ public class PlayerScore : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    public void addHp(int heal)
-    {
-        hp += heal;
-        if (hp > maxHp)
-            hp = maxHp;
-
-        hpText.text = "HP: " + hp;
-    }
-
     private void Damaged(int damage)
     {
         if (hp - damage <= 0)

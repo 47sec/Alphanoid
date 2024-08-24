@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MenuUi.uss?fileID=7433441132597879392&amp;guid=bc584f46b5515ac4898088c9e173cea3&amp;type=3#MenuUi" />
+    <ui:VisualElement focusable="false" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/MainMenu/%D1%84%D0%BE%D0%BD%20%D0%BC%D0%B5%D0%BD%D1%8E.png?fileID=2800000&amp;guid=1ac84f670d98148499f8710f9f1389c1&amp;type=3#фон меню&quot;);">
+        <ui:VisualElement name="ButtonContainer" style="flex-grow: 1; align-self: center; align-items: center; align-content: auto; justify-content: space-evenly; flex-direction: column; margin-top: 200px; flex-shrink: 1; background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(255, 255, 255); margin-left: 600px; margin-right: 600px; margin-bottom: 200px; border-top-left-radius: 100px; border-top-right-radius: 100px; border-bottom-right-radius: 100px; border-bottom-left-radius: 100px; height: 681px; width: 720px;">
+            <ui:Button name="Play" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/MainMenu/%D0%98%D0%B3%D1%80%D0%B0%D1%82%D1%8C.png?fileID=2800000&amp;guid=de05fc267a0897245a0e6f6e240bae1f&amp;type=3#Играть&quot;);" />
+            <ui:Button name="Settings" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/MainMenu/%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8.png?fileID=2800000&amp;guid=9b80404207f27034291d3495e9d8814e&amp;type=3#Настройки&quot;);" />
+            <ui:Button name="Exit" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/MainMenu/%D0%92%D1%8B%D0%B9%D1%82%D0%B8.png?fileID=2800000&amp;guid=bcbc907e3521cc345aee452feb1e37bf&amp;type=3#Выйти&quot;);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

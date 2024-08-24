@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class SceneControl : MonoBehaviour
 {
@@ -20,4 +21,6 @@ public class SceneControl : MonoBehaviour
         Debug.Log("Exited the game");
         Application.Quit();
     }
+
+
 }
